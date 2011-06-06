@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="79">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df name="audio-player" root="/home/dcarrera/source/gtk3/audio-player">
+      <df name="autom4te.cache">
+      </df>
+      <df name="Debug">
+        <df name="po">
+        </df>
+        <df name="src">
+        </df>
+        <in>config.h</in>
+      </df>
+      <df name="po">
+      </df>
+      <df name="src">
+        <df name=".deps">
+        </df>
+        <df name=".libs">
+        </df>
+        <in>main.cc</in>
+      </df>
+      <in>config.h</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>/home/dcarrera/source/gtk3/audio-player/Makefile</itemPath>
+      <itemPath>/home/dcarrera/source/gtk3/audio-player/configure</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>/home/dcarrera/source/gtk3/audio-player</Elem>
+  </sourceRootList>
+  <projectmakefile>/home/dcarrera/source/gtk3/audio-player/Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>/home/dcarrera/source/gtk3/audio-player</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath>/home/dcarrera/source/gtk3/audio-player/src/audio_player</executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>/usr/include/freetype2/freetype</pElem>
+              <pElem>/usr/include/freetype2/freetype/config</pElem>
+              <pElem>/usr/include/giomm-2.4</pElem>
+              <pElem>/usr/include/cairomm-1.0/cairomm</pElem>
+              <pElem>/usr/include/pango-1.0/pango</pElem>
+              <pElem>/usr/include/sigc++-2.0/sigc++/adaptors</pElem>
+              <pElem>/usr/include/pangomm-1.4</pElem>
+              <pElem>/usr/include/atkmm-1.6</pElem>
+              <pElem>/usr/include/cairo</pElem>
+              <pElem>/usr/include/sigc++-2.0/sigc++</pElem>
+              <pElem>/usr/include/gdk-pixbuf-2.0</pElem>
+              <pElem>/usr/include/gdkmm-3.0</pElem>
+              <pElem>/usr/include/cairomm-1.0</pElem>
+              <pElem>/usr/include/gtk-3.0</pElem>
+              <pElem>/usr/include/sigc++-2.0/sigc++/adaptors/lambda</pElem>
+              <pElem>/usr/include/glib-2.0/gobject</pElem>
+              <pElem>/usr/include/atk-1.0</pElem>
+              <pElem>src</pElem>
+              <pElem>/usr/include/fontconfig</pElem>
+              <pElem>/usr/include/gdk-pixbuf-2.0/gdk-pixbuf</pElem>
+              <pElem>/usr/include/giomm-2.4/giomm</pElem>
+              <pElem>/usr/include/glib-2.0</pElem>
+              <pElem>.</pElem>
+              <pElem>/usr/lib/glibmm-2.4/include</pElem>
+              <pElem>/usr/lib/pangomm-1.4/include</pElem>
+              <pElem>/usr/include/gdkmm-3.0/gdkmm</pElem>
+              <pElem>/usr/include/glib-2.0/glib</pElem>
+              <pElem>/usr/include/sigc++-2.0/sigc++/functors</pElem>
+              <pElem>/usr/include/atkmm-1.6/atkmm</pElem>
+              <pElem>/usr/lib/gdkmm-3.0/include</pElem>
+              <pElem>/usr/include/glibmm-2.4</pElem>
+              <pElem>/usr/lib/gtkmm-3.0/include</pElem>
+              <pElem>/usr/include/glibmm-2.4/glibmm</pElem>
+              <pElem>/usr/include/pangomm-1.4/pangomm</pElem>
+              <pElem>/usr/include/pango-1.0</pElem>
+              <pElem>/usr/include/glib-2.0/gio</pElem>
+              <pElem>/usr/lib/i386-linux-gnu/glib-2.0/include</pElem>
+              <pElem>/usr/lib/sigc++-2.0/include</pElem>
+              <pElem>/usr/include/sigc++-2.0</pElem>
+              <pElem>/usr/include/atk-1.0/atk</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>HAVE_CONFIG_H=1</Elem>
+              <Elem>__REGISTER_PREFIX__=</Elem>
+              <Elem>PACKAGE_DATA_DIR="/usr/local/share"</Elem>
+              <Elem>_REENTRANT=1</Elem>
+              <Elem>__USER_LABEL_PREFIX__=</Elem>
+              <Elem>GSEAL_ENABLE=1</Elem>
+              <Elem>PACKAGE_LOCALE_DIR="/usr/local/share/locale"</Elem>
+              <Elem>PACKAGE_SRC_DIR="."</Elem>
+            </preprocessorList>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="/home/dcarrera/source/gtk3/audio-player/Debug/config.h"
+            ex="true"
+            tool="3"
+            flavor="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

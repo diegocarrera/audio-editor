@@ -19,6 +19,7 @@
   <object class="GtkImage" id="image4">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="xpad">4</property>
     <property name="stock">gtk-quit</property>
   </object>
   <object class="GtkImage" id="image5">
@@ -73,7 +74,7 @@
                         <property name="use_action_appearance">False</property>
                         <property name="image">image2</property>
                         <property name="use_stock">False</property>
-                        <signal name="activate" handler="onOpenImage" swapped="no"/>
+                        <signal name="activate" handler="on_open_image" swapped="no"/>
                       </object>
                     </child>
                     <child>

@@ -16,7 +16,7 @@
 
 
 
-VPATH = /home/dcarrera/source/gtk3/audio-player/src
+
 pkgdatadir = $(datadir)/audio_player
 pkgincludedir = $(includedir)/audio_player
 pkglibdir = $(libdir)/audio_player
@@ -59,7 +59,7 @@ am__v_lt_0 = --silent
 audio_player_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(audio_player_LDFLAGS) $(LDFLAGS) -o $@
-DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
+DEFAULT_INCLUDES = -I. -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
@@ -125,15 +125,15 @@ AUTOMAKE = ${SHELL} /home/dcarrera/source/gtk3/audio-player/missing --run automa
 AWK = mawk
 CATALOGS = 
 CATOBJEXT = .gmo
-CC = gcc
+CC = /usr/bin/gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O0
-CPP = gcc -E
+CFLAGS = -g3 -gdwarf-2
+CPP = /usr/bin/gcc -E
 CPPFLAGS = 
-CXX = g++
-CXXCPP = g++ -E
+CXX = /usr/bin/g++
+CXXCPP = /usr/bin/g++ -E
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O0
+CXXFLAGS = -g3 -gdwarf-2
 CYGPATH_W = echo
 DATADIRNAME = share
 DEFS = -DHAVE_CONFIG_H
@@ -169,10 +169,10 @@ LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
-MAINT = 
+MAINT = #
 MAKEINFO = ${SHELL} /home/dcarrera/source/gtk3/audio-player/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
-MKINSTALLDIRS = /home/dcarrera/source/gtk3/audio-player/mkinstalldirs
+MKINSTALLDIRS = ./mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
 MSGFMT_OPTS = -c
 MSGMERGE = /usr/bin/msgmerge
@@ -205,12 +205,12 @@ STRIP = strip
 USE_NLS = yes
 VERSION = 0.1
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/dcarrera/source/gtk3/audio-player/Debug/src
+abs_builddir = /home/dcarrera/source/gtk3/audio-player/src
 abs_srcdir = /home/dcarrera/source/gtk3/audio-player/src
-abs_top_builddir = /home/dcarrera/source/gtk3/audio-player/Debug
+abs_top_builddir = /home/dcarrera/source/gtk3/audio-player
 abs_top_srcdir = /home/dcarrera/source/gtk3/audio-player
-ac_ct_CC = gcc
-ac_ct_CXX = g++
+ac_ct_CC = /usr/bin/gcc
+ac_ct_CXX = 
 ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .
@@ -252,12 +252,12 @@ program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
-srcdir = /home/dcarrera/source/gtk3/audio-player/src
+srcdir = .
 sysconfdir = ${prefix}/etc
 target_alias = 
 top_build_prefix = ../
 top_builddir = ..
-top_srcdir = /home/dcarrera/source/gtk3/audio-player
+top_srcdir = ..
 uidir = $(datadir)/audio_player/ui
 ui_DATA = audio_player.ui
 AM_CPPFLAGS = \
@@ -282,7 +282,7 @@ all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .cc .lo .o .obj
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in: # $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -307,9 +307,9 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 
-$(top_srcdir)/configure:  $(am__configure_deps)
+$(top_srcdir)/configure: # $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+$(ACLOCAL_M4): # $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 install-binPROGRAMS: $(bin_PROGRAMS)

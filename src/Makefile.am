@@ -4,10 +4,7 @@
 
 
 uidir = $(datadir)/audio_player/ui
-ui_DATA = main.c \
-	audio_player.ui \
-	audio_about.ui 
-
+ui_DATA = audio_player.ui
 
 
 AM_CPPFLAGS = \
@@ -23,10 +20,11 @@ AM_CFLAGS =\
 bin_PROGRAMS = audio_player
 
 audio_player_SOURCES = \
-	main.c
+	wav_in.cc \
+	wav_out.cc \
+	main.cc
 
-audio_player_LDFLAGS = \
-	-Wl,--export-dynamic
+audio_player_LDFLAGS = 
 
 audio_player_LDADD = $(AUDIO_PLAYER_LIBS)
 
@@ -37,3 +35,4 @@ EXTRA_DIST = $(ui_DATA)
 uninstall-local:
 	-rm -r $(uidir)
 	-rm -r $(datadir)/audio_player
+

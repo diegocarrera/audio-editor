@@ -1,5 +1,5 @@
-main.o: /home/dcarrera/source/gtk3/audio-player/src/main.cc \
- /usr/include/gtkmm-3.0/gtkmm.h /usr/include/glibmm-2.4/glibmm.h \
+main.o: main.cc /usr/include/gtkmm-3.0/gtkmm.h \
+ /usr/include/glibmm-2.4/glibmm.h \
  /usr/lib/glibmm-2.4/include/glibmmconfig.h \
  /usr/include/glibmm-2.4/glibmm/arrayhandle.h \
  /usr/include/glibmm-2.4/glibmm/containerhandle_shared.h \
@@ -1009,7 +1009,7 @@ main.o: /home/dcarrera/source/gtk3/audio-player/src/main.cc \
  /usr/include/gtkmm-3.0/gtkmm/uimanager.h \
  /usr/include/gtkmm-3.0/gtkmm/actiongroup.h \
  /usr/include/gtkmm-3.0/gtkmm/viewport.h /usr/include/c++/4.5/iostream \
- ../config.h /usr/include/libintl.h
+ wav_in.h wav_out.h ../config.h /usr/include/libintl.h
 
 /usr/include/gtkmm-3.0/gtkmm.h:
 
@@ -3270,6 +3270,10 @@ main.o: /home/dcarrera/source/gtk3/audio-player/src/main.cc \
 /usr/include/gtkmm-3.0/gtkmm/viewport.h:
 
 /usr/include/c++/4.5/iostream:
+
+wav_in.h:
+
+wav_out.h:
 
 ../config.h:
 

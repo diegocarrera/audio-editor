@@ -8,7 +8,7 @@ AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AC_CONFIG_HEADERS([config.h])
 AM_MAINTAINER_MODE
 
-AC_PROG_CC
+AC_PROG_CXX
 
 
 
@@ -28,15 +28,7 @@ AM_PROG_LIBTOOL
 
 
 
-PKG_CHECK_MODULES(gtk,atk
-cairo
-libcanberra-gtk3
-gdk-3.0
-gdl-3.0
-dbusmenu-gtk3-0.4
-gtksourceview-3.0)
-
-PKG_CHECK_MODULES(AUDIO_PLAYER, [gtk+-3.0 ])
+PKG_CHECK_MODULES(AUDIO_PLAYER, [gtkmm-3.0 ])
 
 
 

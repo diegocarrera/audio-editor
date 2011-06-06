@@ -15,7 +15,7 @@
 
 
 
-VPATH = /home/dcarrera/source/gtk3/audio-player
+
 pkgdatadir = $(datadir)/audio_player
 pkgincludedir = $(includedir)/audio_player
 pkglibdir = $(libdir)/audio_player
@@ -145,15 +145,15 @@ AUTOMAKE = ${SHELL} /home/dcarrera/source/gtk3/audio-player/missing --run automa
 AWK = mawk
 CATALOGS = 
 CATOBJEXT = .gmo
-CC = gcc
+CC = /usr/bin/gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O0
-CPP = gcc -E
+CFLAGS = -g3 -gdwarf-2
+CPP = /usr/bin/gcc -E
 CPPFLAGS = 
-CXX = g++
-CXXCPP = g++ -E
+CXX = /usr/bin/g++
+CXXCPP = /usr/bin/g++ -E
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O0
+CXXFLAGS = -g3 -gdwarf-2
 CYGPATH_W = echo
 DATADIRNAME = share
 DEFS = -DHAVE_CONFIG_H
@@ -189,10 +189,10 @@ LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
-MAINT = 
+MAINT = #
 MAKEINFO = ${SHELL} /home/dcarrera/source/gtk3/audio-player/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
-MKINSTALLDIRS = /home/dcarrera/source/gtk3/audio-player/mkinstalldirs
+MKINSTALLDIRS = ./mkinstalldirs
 MSGFMT = /usr/bin/msgfmt
 MSGFMT_OPTS = -c
 MSGMERGE = /usr/bin/msgmerge
@@ -225,12 +225,12 @@ STRIP = strip
 USE_NLS = yes
 VERSION = 0.1
 XGETTEXT = /usr/bin/xgettext
-abs_builddir = /home/dcarrera/source/gtk3/audio-player/Debug
+abs_builddir = /home/dcarrera/source/gtk3/audio-player
 abs_srcdir = /home/dcarrera/source/gtk3/audio-player
-abs_top_builddir = /home/dcarrera/source/gtk3/audio-player/Debug
+abs_top_builddir = /home/dcarrera/source/gtk3/audio-player
 abs_top_srcdir = /home/dcarrera/source/gtk3/audio-player
-ac_ct_CC = gcc
-ac_ct_CXX = g++
+ac_ct_CC = /usr/bin/gcc
+ac_ct_CXX = 
 ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .
@@ -272,12 +272,12 @@ program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
-srcdir = /home/dcarrera/source/gtk3/audio-player
+srcdir = .
 sysconfdir = ${prefix}/etc
 target_alias = 
 top_build_prefix = 
 top_builddir = .
-top_srcdir = /home/dcarrera/source/gtk3/audio-player
+top_srcdir = .
 SUBDIRS = src po
 audio_playerdocdir = ${prefix}/doc/audio_player
 audio_playerdoc_DATA = \
@@ -306,7 +306,7 @@ all: config.h
 .SUFFIXES:
 am--refresh:
 	@:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in: # $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -333,9 +333,9 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
 
-$(top_srcdir)/configure:  $(am__configure_deps)
+$(top_srcdir)/configure: # $(am__configure_deps)
 	$(am__cd) $(srcdir) && $(AUTOCONF)
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+$(ACLOCAL_M4): # $(am__aclocal_m4_deps)
 	$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 $(am__aclocal_m4_deps):
 
@@ -348,7 +348,7 @@ config.h: stamp-h1
 stamp-h1: $(srcdir)/config.h.in $(top_builddir)/config.status
 	@rm -f stamp-h1
 	cd $(top_builddir) && $(SHELL) ./config.status config.h
-$(srcdir)/config.h.in:  $(am__configure_deps) 
+$(srcdir)/config.h.in: # $(am__configure_deps) 
 	($(am__cd) $(top_srcdir) && $(AUTOHEADER))
 	rm -f stamp-h1
 	touch $@
