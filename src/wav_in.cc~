@@ -255,7 +255,6 @@ WAV_IN::WAV_IN(char *file_name)
       printf("cant alloc\n");
       exit(-1);
     }
-    
 
   /* read signal data */
   wstat = fread((void *) wbuff, wbuff_len, (size_t) 1, fw);
