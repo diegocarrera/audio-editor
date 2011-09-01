@@ -20,9 +20,7 @@ AM_CFLAGS =\
 bin_PROGRAMS = audio_player
 
 audio_player_SOURCES = \
-	wav_in.cc \
-	wav_out.cc \
-	main.cc	
+	main.cc
 
 audio_player_LDFLAGS = 
 

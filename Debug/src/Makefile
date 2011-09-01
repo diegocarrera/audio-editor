@@ -117,8 +117,8 @@ ALL_LINGUAS =
 AMTAR = ${SHELL} /home/dcarrera/source/gtk3/audio-player/missing --run tar
 AM_DEFAULT_VERBOSITY = 0
 AR = ar
-AUDIO_PLAYER_CFLAGS = -pthread -DGSEAL_ENABLE -I/usr/include/atk-1.0 -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/gio-unix-2.0/ -I/usr/include/gtkmm-3.0 -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/lib/giomm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/gtk-3.0 -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/include/cairo -I/usr/include/pixman-1  
-AUDIO_PLAYER_LIBS = -pthread -L/usr/lib/i386-linux-gnu -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lgiomm-2.4 -lpangomm-1.4 -lgtk-3 -lglibmm-2.4 -lcairomm-1.0 -lgdk-3 -latk-1.0 -lcairo-gobject -lgio-2.0 -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lm -lpango-1.0 -lfreetype -lfontconfig -lgmodule-2.0 -lcairo -lsigc-2.0 -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0  
+AUDIO_PLAYER_CFLAGS = -pthread -DGSEAL_ENABLE -I/usr/include/atk-1.0 -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/pango-1.0 -I/usr/include/freetype2 -I/usr/include/libpng12 -I/usr/include/gio-unix-2.0/ -I/usr/include/gtkmm-3.0 -I/usr/lib/gtkmm-3.0/include -I/usr/include/atkmm-1.6 -I/usr/include/giomm-2.4 -I/usr/lib/giomm-2.4/include -I/usr/include/pangomm-1.4 -I/usr/lib/pangomm-1.4/include -I/usr/include/gtk-3.0 -I/usr/include/cairomm-1.0 -I/usr/lib/cairomm-1.0/include -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/gtk-3.0/unix-print -I/usr/include/gdkmm-3.0 -I/usr/lib/gdkmm-3.0/include -I/usr/include/glibmm-2.4 -I/usr/lib/glibmm-2.4/include -I/usr/include/sigc++-2.0 -I/usr/lib/sigc++-2.0/include -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gstreamermm-0.10 -I/usr/lib/gstreamermm-0.10/include -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/gstreamer-0.10 -I/usr/include/libxml2  
+AUDIO_PLAYER_LIBS = -pthread -L/usr/lib/i386-linux-gnu -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lpangomm-1.4 -lgtk-3 -lcairomm-1.0 -lgdk-3 -latk-1.0 -lcairo-gobject -lpangoft2-1.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lm -lpango-1.0 -lfreetype -lfontconfig -lcairo -lgstreamermm-0.10 -lgiomm-2.4 -lxml++-2.6 -lgstcontroller-0.10 -lgstdataprotocol-0.10 -lgstnet-0.10 -lgstaudio-0.10 -lgstcdda-0.10 -lgstnetbuffer-0.10 -lgstrtp-0.10 -lgstvideo-0.10 -lgio-2.0 -lglibmm-2.4 -lsigc-2.0 -lgstinterfaces-0.10 -lgsttag-0.10 -lgstbase-0.10 -lgstreamer-0.10 -lgobject-2.0 -lgmodule-2.0 -lxml2 -lgthread-2.0 -lrt -lglib-2.0  
 AUTOCONF = ${SHELL} /home/dcarrera/source/gtk3/audio-player/missing --run autoconf
 AUTOHEADER = ${SHELL} /home/dcarrera/source/gtk3/audio-player/missing --run autoheader
 AUTOMAKE = ${SHELL} /home/dcarrera/source/gtk3/audio-player/missing --run automake-1.11
@@ -273,7 +273,7 @@ AM_CFLAGS = \
 audio_player_SOURCES = \
 	wav_in.cc \
 	wav_out.cc \
-	main.cc
+	main.cc	
 
 audio_player_LDFLAGS = 
 audio_player_LDADD = $(AUDIO_PLAYER_LIBS)

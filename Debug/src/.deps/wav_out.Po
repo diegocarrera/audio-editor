@@ -1,4 +1,5 @@
-wav_in.o: wav_in.cc /usr/include/c++/4.5/cstdio \
+wav_out.o: /home/dcarrera/source/gtk3/audio-player/src/wav_out.cc \
+ /usr/include/c++/4.5/cstdio \
  /usr/include/c++/4.5/i686-linux-gnu/bits/c++config.h \
  /usr/include/c++/4.5/i686-linux-gnu/bits/os_defines.h \
  /usr/include/features.h /usr/include/bits/predefs.h \
@@ -26,8 +27,12 @@ wav_in.o: wav_in.cc /usr/include/c++/4.5/cstdio \
  /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
  /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
  /usr/include/bits/mathcalls.h /usr/include/c++/4.5/bits/cmath.tcc \
- f_err.h f_ptch.h /usr/include/string.h /usr/include/memory.h wav_def.h \
- wav_in.h
+ /home/dcarrera/source/gtk3/audio-player/src/f_err.h \
+ /home/dcarrera/source/gtk3/audio-player/src/f_ptch.h \
+ /usr/include/string.h /usr/include/memory.h \
+ /home/dcarrera/source/gtk3/audio-player/src/wav_def.h \
+ /home/dcarrera/source/gtk3/audio-player/src/wav_out.h \
+ /home/dcarrera/source/gtk3/audio-player/src/wav_in.h
 
 /usr/include/c++/4.5/cstdio:
 
@@ -129,14 +134,16 @@ wav_in.o: wav_in.cc /usr/include/c++/4.5/cstdio \
 
 /usr/include/c++/4.5/bits/cmath.tcc:
 
-f_err.h:
+/home/dcarrera/source/gtk3/audio-player/src/f_err.h:
 
-f_ptch.h:
+/home/dcarrera/source/gtk3/audio-player/src/f_ptch.h:
 
 /usr/include/string.h:
 
 /usr/include/memory.h:
 
-wav_def.h:
+/home/dcarrera/source/gtk3/audio-player/src/wav_def.h:
 
-wav_in.h:
+/home/dcarrera/source/gtk3/audio-player/src/wav_out.h:
+
+/home/dcarrera/source/gtk3/audio-player/src/wav_in.h:

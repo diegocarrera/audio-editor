@@ -273,7 +273,7 @@ AM_CFLAGS = \
 audio_player_SOURCES = \
 	wav_in.cc \
 	wav_out.cc \
-	main.cc
+	main.cc	
 
 audio_player_LDFLAGS = 
 audio_player_LDADD = $(AUDIO_PLAYER_LIBS)

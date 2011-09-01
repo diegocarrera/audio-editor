@@ -19,6 +19,7 @@
 
 #include <gtkmm.h>
 #include <iostream>
+#include <gstreamermm.h>
 
 #include "wav_in.h"
 #include "wav_out.h"
@@ -30,30 +31,73 @@
 #include <bits/stringfwd.h>
 #endif
 
-/* For testing propose use the local (not installed) ui file */
-/* #define UI_FILE PACKAGE_DATA_DIR"/audio_player/ui/audio_player.ui" */
 #define UI_FILE "src/audio_player.ui"
 
 gchar* ui_file[] =
-  { "src/audio_player.ui", "src/audio_about.ui" };
+  { "src/audio_player.ui", "src/audio_about.ui", "src/audio_fileChooser.ui" };
 
 Gtk::MenuItem* quit_item_menu;
 Gtk::AboutDialog *aboutDialog = NULL;
+Gtk::FileChooserDialog *fileChooserDialog = NULL;
 
 #define UI_MAIN 0
 #define UI_ABOUT 1
+#define UI_FILE_CHOOSER 2
 
+class Sound
+{
+  public:
+	Sound();
 
+	void start_playing(double frequency);
+	bool stop_playing();
+		
+  private:
+	Glib::RefPtr<Gst::Pipeline> m_pipeline;
+	Glib::RefPtr<Gst::Element> m_source;
+	Glib::RefPtr<Gst::Element> m_sink;
+};
+
+Sound::Sound()
+{
+  m_pipeline = Gst::Pipeline::create("note");
+  m_source = Gst::ElementFactory::create_element("audiotestsrc",
+                                                 "source");
+  m_sink = Gst::ElementFactory::create_element("autoaudiosink",
+	                                             "output");
+  m_pipeline->add(m_source);
+  m_pipeline->add(m_sink);
+  m_source->link(m_sink);
+}
+
+void Sound::start_playing (double frequency)
+{
+  m_source->set_property("freq", frequency);
+  m_pipeline->set_state(Gst::STATE_PLAYING);
+
+  /* stop it after 200ms */
+	Glib::signal_timeout().connect(sigc::mem_fun(*this, &Sound::stop_playing),200);
+}
+
+bool Sound::stop_playing()
+{
+  m_pipeline->set_state(Gst::STATE_NULL);
+  return false;
+}
+
+static void
+on_button_clicked(double frequency, Sound* sound)
+{
+  sound->start_playing (frequency);
+
+	
+}
 static void
 on_open_image(Gtk::Image* image)
 {
   Gtk::FileChooserDialog dialog("Open image", Gtk::FILE_CHOOSER_ACTION_OPEN);
   dialog.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_ACCEPT);
   dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-
-  Glib::RefPtr<Gtk::FileFilter> filter = Gtk::FileFilter::create();
-  filter->add_pixbuf_formats();
-  dialog.add_filter(filter);
 
   switch (dialog.run())
     {
@@ -65,6 +109,8 @@ on_open_image(Gtk::Image* image)
     }
   dialog.hide();
 }
+
+
 
 static Glib::RefPtr<Gtk::Builder>
 get_builder(gint ui)
@@ -100,14 +146,48 @@ static void about ()
   aboutBuilder = get_builder(UI_ABOUT);
   aboutBuilder->get_widget("aboutWindow", aboutDialog);
   aboutDialog->run();
-  aboutDialog->hide();
+  aboutDialog->hide();	
+}
+
+static void file_chooser ()
+{
+  std::cout << "file Chooser function activated" << std::endl;
+  Glib::RefPtr<Gtk::Builder> fileChooserBuilder;
+  fileChooserBuilder = get_builder(UI_FILE_CHOOSER);
+  fileChooserBuilder->get_widget("fileChooserWindow", fileChooserDialog);
+  int result=fileChooserDialog->run();
+
+  switch(result)
+		
+  {
+    case(Gtk::RESPONSE_ACCEPT):
+	{
+      std::cout << "ENTRA" << std::endl;
+	  break;
+	}
+    case(Gtk::RESPONSE_CANCEL):
+    {
+      std::cout << "Cancel clicked." << std::endl;
+      break;
+    }		  
+	default:
+	{
+      printf("value es:%i\n",result);
+	  std::cout << "Unexpected button clicked." << std::endl;
+	  break;
+	}
+		  
+  }
+
+  fileChooserDialog->hide();	
+	
 }
 
 static void
 destroy()
 {
   std::cout << "destroy function activated" << std::endl;
-  Gtk::Main::quit();
+	Gtk::Main::quit();
 }
 
 static void
@@ -136,18 +216,30 @@ main(int argc, char *argv[])
   //variables
   Glib::RefPtr<Gtk::Builder> builder;
   Gtk::Main kit(argc, argv);
+  Gst::init (argc, argv);
+  Sound sound;
+  Gtk::Button* button;	
 
   // call function get_builder for MAIN ui
   builder = get_builder(UI_MAIN);
   Gtk::Window* main_win = 0;
   builder->get_widget("mainWindow", main_win);
 
+  //btn for sound
+  builder->get_widget("btnPlay", button);
+  button->signal_clicked().connect (sigc::bind<double, Sound*>(sigc::ptr_fun(&on_button_clicked),
+	                                 369.23, &sound));
+
+ // builder->get_widget("btnLoad",button);
+ // button->signal_clicked().connect (sigc::bind<Gtk::Image*>(sigc::ptr_fun(&on_open_image), image));
+	
   if (main_win)
     {
-      Gtk::MenuItem* quitMenuItem=0, *aboutMenuItem=0, *efectoMenuItem;
+      Gtk::MenuItem* quitMenuItem=0, *aboutMenuItem=0, *efectoMenuItem=0, *openMenuItem=0;
       builder->get_widget("quit_item_menu",quitMenuItem);
-      builder->get_widget("acerca_menu_item",aboutMenuItem);
-      builder->get_widget("efecto1_menu_item",efectoMenuItem);
+      builder->get_widget("open_item_menu",openMenuItem);
+      builder->get_widget("acerca_item_menu",aboutMenuItem);
+      builder->get_widget("efecto1_item_menu",efectoMenuItem);
       if(quitMenuItem)
         {
           quitMenuItem->signal_activate().connect(sigc::ptr_fun(&destroy));
@@ -160,6 +252,10 @@ main(int argc, char *argv[])
         {
           efectoMenuItem->signal_activate().connect(sigc::ptr_fun(&audio_open));
         }
+      if(openMenuItem)
+        {
+          openMenuItem->signal_activate().connect(sigc::ptr_fun(&file_chooser));
+        }		
 
       kit.run(*main_win);
     }

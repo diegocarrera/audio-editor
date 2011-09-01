@@ -28,7 +28,7 @@ AM_PROG_LIBTOOL
 
 
 
-PKG_CHECK_MODULES(AUDIO_PLAYER, [gtkmm-3.0 ])
+PKG_CHECK_MODULES(AUDIO_PLAYER, [gtkmm-3.0 gstreamermm-0.10])
 
 
 

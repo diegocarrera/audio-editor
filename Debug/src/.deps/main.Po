@@ -1009,7 +1009,257 @@ main.o: /home/dcarrera/source/gtk3/audio-player/src/main.cc \
  /usr/include/gtkmm-3.0/gtkmm/uimanager.h \
  /usr/include/gtkmm-3.0/gtkmm/actiongroup.h \
  /usr/include/gtkmm-3.0/gtkmm/viewport.h /usr/include/c++/4.5/iostream \
- ../config.h /usr/include/libintl.h
+ /usr/include/gstreamermm-0.10/gstreamermm.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/init.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/version.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/bin.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/element.h \
+ /usr/include/gstreamer-0.10/gst/gstelement.h \
+ /usr/include/gstreamer-0.10/gst/gstconfig.h \
+ /usr/include/libxml2/libxml/parser.h \
+ /usr/include/libxml2/libxml/xmlversion.h \
+ /usr/include/libxml2/libxml/xmlexports.h \
+ /usr/include/libxml2/libxml/tree.h \
+ /usr/include/libxml2/libxml/xmlstring.h \
+ /usr/include/libxml2/libxml/xmlregexp.h \
+ /usr/include/libxml2/libxml/dict.h /usr/include/libxml2/libxml/hash.h \
+ /usr/include/libxml2/libxml/valid.h \
+ /usr/include/libxml2/libxml/xmlerror.h \
+ /usr/include/libxml2/libxml/list.h \
+ /usr/include/libxml2/libxml/xmlautomata.h \
+ /usr/include/libxml2/libxml/entities.h \
+ /usr/include/libxml2/libxml/encoding.h /usr/include/iconv.h \
+ /usr/include/libxml2/libxml/xmlIO.h \
+ /usr/include/libxml2/libxml/globals.h /usr/include/libxml2/libxml/SAX.h \
+ /usr/include/libxml2/libxml/xlink.h /usr/include/libxml2/libxml/SAX2.h \
+ /usr/include/libxml2/libxml/xmlmemory.h \
+ /usr/include/libxml2/libxml/threads.h \
+ /usr/include/gstreamer-0.10/gst/gstobject.h \
+ /usr/include/gstreamer-0.10/gst/gstpad.h \
+ /usr/include/gstreamer-0.10/gst/gstbuffer.h \
+ /usr/include/gstreamer-0.10/gst/gstminiobject.h \
+ /usr/include/gstreamer-0.10/gst/gstclock.h \
+ /usr/include/gstreamer-0.10/gst/gstcaps.h \
+ /usr/include/gstreamer-0.10/gst/gststructure.h \
+ /usr/include/gstreamer-0.10/gst/gstdatetime.h \
+ /usr/include/gstreamer-0.10/gst/glib-compat.h \
+ /usr/include/gstreamer-0.10/gst/gstbufferlist.h \
+ /usr/include/gstreamer-0.10/gst/gstevent.h \
+ /usr/include/gstreamer-0.10/gst/gstformat.h \
+ /usr/include/gstreamer-0.10/gst/gstiterator.h \
+ /usr/include/gstreamer-0.10/gst/gsttaglist.h \
+ /usr/include/gstreamer-0.10/gst/gstquery.h \
+ /usr/include/gstreamer-0.10/gst/gsttask.h \
+ /usr/include/gstreamer-0.10/gst/gsttaskpool.h \
+ /usr/include/gstreamer-0.10/gst/gstpadtemplate.h \
+ /usr/include/gstreamer-0.10/gst/gstbus.h \
+ /usr/include/gstreamer-0.10/gst/gstmessage.h \
+ /usr/include/gstreamer-0.10/gst/gstelementfactory.h \
+ /usr/include/gstreamer-0.10/gst/gstplugin.h \
+ /usr/include/gstreamer-0.10/gst/gstmacros.h \
+ /usr/include/gstreamer-0.10/gst/gstpluginfeature.h \
+ /usr/include/gstreamer-0.10/gst/gstindex.h \
+ /usr/include/gstreamer-0.10/gst/gstindexfactory.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/object.h \
+ /usr/include/libxml++-2.6/libxml++/nodes/node.h \
+ /usr/include/libxml++-2.6/libxml++/noncopyable.h \
+ /usr/include/libxml++-2.6/libxml++/exceptions/exception.h \
+ /usr/lib/libxml++-2.6/include/libxml++config.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/clock.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/enums.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/error.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/event.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/miniobject.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/wrap.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/format.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/message.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/query.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/structure.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/value.h \
+ /usr/include/gstreamer-0.10/gst/gstvalue.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/childproxy.h \
+ /usr/include/gstreamer-0.10/gst/gstchildproxy.h \
+ /usr/include/gstreamer-0.10/gst/gst.h \
+ /usr/include/gstreamer-0.10/gst/gstenumtypes.h \
+ /usr/include/gstreamer-0.10/gst/gstversion.h \
+ /usr/include/gstreamer-0.10/gst/gstbin.h \
+ /usr/include/gstreamer-0.10/gst/gstdebugutils.h \
+ /usr/include/gstreamer-0.10/gst/gsterror.h /usr/include/errno.h \
+ /usr/include/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/i386-linux-gnu/asm/errno.h /usr/include/asm-generic/errno.h \
+ /usr/include/asm-generic/errno-base.h \
+ /usr/include/gstreamer-0.10/gst/gstghostpad.h \
+ /usr/include/gstreamer-0.10/gst/gstinfo.h \
+ /usr/include/gstreamer-0.10/gst/gstinterface.h \
+ /usr/include/gstreamer-0.10/gst/gstmarshal.h \
+ /usr/include/gstreamer-0.10/gst/gstparamspecs.h \
+ /usr/include/gstreamer-0.10/gst/gstpipeline.h \
+ /usr/include/gstreamer-0.10/gst/gstpoll.h \
+ /usr/include/gstreamer-0.10/gst/gstpreset.h \
+ /usr/include/gstreamer-0.10/gst/gstregistry.h \
+ /usr/include/gstreamer-0.10/gst/gstsegment.h \
+ /usr/include/gstreamer-0.10/gst/gstsystemclock.h \
+ /usr/include/gstreamer-0.10/gst/gsttagsetter.h \
+ /usr/include/gstreamer-0.10/gst/gsttrace.h \
+ /usr/include/gstreamer-0.10/gst/gsttypefind.h \
+ /usr/include/gstreamer-0.10/gst/gsttypefindfactory.h \
+ /usr/include/gstreamer-0.10/gst/gsturi.h \
+ /usr/include/gstreamer-0.10/gst/gstutils.h \
+ /usr/include/gstreamer-0.10/gst/gstparse.h \
+ /usr/include/gstreamer-0.10/gst/gstxml.h \
+ /usr/include/gstreamer-0.10/gst/gstcompat.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/pad.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/buffer.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/caps.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/bus.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/elementfactory.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/pluginfeature.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/filter.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/ghostpad.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/index.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/indexfactory.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/interface.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/iterator.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/handle_error.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/padtemplate.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/parse.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/pipeline.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/plugin.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/preset.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/registry.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/segment.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/systemclock.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/taglist.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/tagsetter.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/task.h \
+ /usr/include/c++/4.5/memory \
+ /usr/include/c++/4.5/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/4.5/backward/auto_ptr.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/taskpool.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/typefind.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/typefindfactory.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/urihandler.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/xml.h \
+ /usr/include/libxml++-2.6/libxml++/document.h \
+ /usr/include/libxml++-2.6/libxml++/exceptions/parse_error.h \
+ /usr/include/libxml++-2.6/libxml++/exceptions/internal_error.h \
+ /usr/include/libxml++-2.6/libxml++/nodes/element.h \
+ /usr/include/libxml++-2.6/libxml++/attribute.h \
+ /usr/include/libxml++-2.6/libxml++/nodes/commentnode.h \
+ /usr/include/libxml++-2.6/libxml++/nodes/contentnode.h \
+ /usr/include/libxml++-2.6/libxml++/dtd.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/basesink.h \
+ /usr/include/gstreamer-0.10/gst/base/gstbasesink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/basesrc.h \
+ /usr/include/gstreamer-0.10/gst/base/gstbasesrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/basetransform.h \
+ /usr/include/gstreamer-0.10/gst/base/gstbasetransform.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/pushsrc.h \
+ /usr/include/gstreamer-0.10/gst/base/gstpushsrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/audioclock.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/audiofilter.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/ringbuffer.h \
+ /usr/include/gstreamer-0.10/gst/audio/gstringbuffer.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/audiosink.h \
+ /usr/include/gstreamer-0.10/gst/audio/gstaudiosink.h \
+ /usr/include/gstreamer-0.10/gst/audio/gstbaseaudiosink.h \
+ /usr/include/gstreamer-0.10/gst/audio/gstringbuffer.h \
+ /usr/include/gstreamer-0.10/gst/audio/gstaudioclock.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/baseaudiosink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/audiosrc.h \
+ /usr/include/gstreamer-0.10/gst/audio/gstaudiosrc.h \
+ /usr/include/gstreamer-0.10/gst/audio/gstbaseaudiosrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/baseaudiosrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/cddabasesrc.h \
+ /usr/include/gstreamer-0.10/gst/cdda/gstcddabasesrc.h \
+ /usr/include/gstreamer-0.10/gst/tag/tag.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/videosink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/colorbalance.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/colorbalance.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/colorbalancechannel.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/interfaces-enumtypes.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/colorbalancechannel.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/mixer.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/mixer.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/mixeroptions.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/mixertrack.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/mixertrack.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/mixeroptions.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/navigation.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/navigation.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/propertyprobe.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/propertyprobe.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/streamvolume.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/streamvolume.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/tuner.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/tuner.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/tunernorm.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/tunerchannel.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/tunerchannel.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/tunernorm.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/videoorientation.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/videoorientation.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/xoverlay.h \
+ /usr/include/gstreamer-0.10/gst/interfaces/xoverlay.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/capsfilter.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/fakesrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/fakesink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/fdsink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/fdsrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/filesrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/filesink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/identity.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/multiqueue.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/queue.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/tee.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/typefindelement.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/adder.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/alsamixer.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/alsasink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/alsasrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/audioconvert.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/audioresample.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/audiotestsrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/cdparanoiasrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/clockoverlay.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/textoverlay.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/decodebin.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/decodebin2.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/ffmpegcolorspace.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/gdpdepay.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/gdppay.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/giosink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/giosrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/giostreamsink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/giostreamsrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/multifdsink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/oggdemux.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/oggmux.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/playbin.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/playbin2.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/tcpclientsrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/tcpclientsink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/tcpserversrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/tcpserversink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/textrender.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/theoradec.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/theoraenc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/theoraparse.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/timeoverlay.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/uridecodebin.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/videorate.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/videoscale.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/videotestsrc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/volume.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/vorbisdec.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/vorbisenc.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/vorbisparse.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/vorbistag.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/ximagesink.h \
+ /usr/include/gstreamermm-0.10/gstreamermm/xvimagesink.h \
+ /home/dcarrera/source/gtk3/audio-player/src/wav_in.h \
+ /home/dcarrera/source/gtk3/audio-player/src/wav_out.h ../config.h \
+ /usr/include/libintl.h
 
 /usr/include/gtkmm-3.0/gtkmm.h:
 
@@ -3270,6 +3520,520 @@ main.o: /home/dcarrera/source/gtk3/audio-player/src/main.cc \
 /usr/include/gtkmm-3.0/gtkmm/viewport.h:
 
 /usr/include/c++/4.5/iostream:
+
+/usr/include/gstreamermm-0.10/gstreamermm.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/init.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/version.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/bin.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/element.h:
+
+/usr/include/gstreamer-0.10/gst/gstelement.h:
+
+/usr/include/gstreamer-0.10/gst/gstconfig.h:
+
+/usr/include/libxml2/libxml/parser.h:
+
+/usr/include/libxml2/libxml/xmlversion.h:
+
+/usr/include/libxml2/libxml/xmlexports.h:
+
+/usr/include/libxml2/libxml/tree.h:
+
+/usr/include/libxml2/libxml/xmlstring.h:
+
+/usr/include/libxml2/libxml/xmlregexp.h:
+
+/usr/include/libxml2/libxml/dict.h:
+
+/usr/include/libxml2/libxml/hash.h:
+
+/usr/include/libxml2/libxml/valid.h:
+
+/usr/include/libxml2/libxml/xmlerror.h:
+
+/usr/include/libxml2/libxml/list.h:
+
+/usr/include/libxml2/libxml/xmlautomata.h:
+
+/usr/include/libxml2/libxml/entities.h:
+
+/usr/include/libxml2/libxml/encoding.h:
+
+/usr/include/iconv.h:
+
+/usr/include/libxml2/libxml/xmlIO.h:
+
+/usr/include/libxml2/libxml/globals.h:
+
+/usr/include/libxml2/libxml/SAX.h:
+
+/usr/include/libxml2/libxml/xlink.h:
+
+/usr/include/libxml2/libxml/SAX2.h:
+
+/usr/include/libxml2/libxml/xmlmemory.h:
+
+/usr/include/libxml2/libxml/threads.h:
+
+/usr/include/gstreamer-0.10/gst/gstobject.h:
+
+/usr/include/gstreamer-0.10/gst/gstpad.h:
+
+/usr/include/gstreamer-0.10/gst/gstbuffer.h:
+
+/usr/include/gstreamer-0.10/gst/gstminiobject.h:
+
+/usr/include/gstreamer-0.10/gst/gstclock.h:
+
+/usr/include/gstreamer-0.10/gst/gstcaps.h:
+
+/usr/include/gstreamer-0.10/gst/gststructure.h:
+
+/usr/include/gstreamer-0.10/gst/gstdatetime.h:
+
+/usr/include/gstreamer-0.10/gst/glib-compat.h:
+
+/usr/include/gstreamer-0.10/gst/gstbufferlist.h:
+
+/usr/include/gstreamer-0.10/gst/gstevent.h:
+
+/usr/include/gstreamer-0.10/gst/gstformat.h:
+
+/usr/include/gstreamer-0.10/gst/gstiterator.h:
+
+/usr/include/gstreamer-0.10/gst/gsttaglist.h:
+
+/usr/include/gstreamer-0.10/gst/gstquery.h:
+
+/usr/include/gstreamer-0.10/gst/gsttask.h:
+
+/usr/include/gstreamer-0.10/gst/gsttaskpool.h:
+
+/usr/include/gstreamer-0.10/gst/gstpadtemplate.h:
+
+/usr/include/gstreamer-0.10/gst/gstbus.h:
+
+/usr/include/gstreamer-0.10/gst/gstmessage.h:
+
+/usr/include/gstreamer-0.10/gst/gstelementfactory.h:
+
+/usr/include/gstreamer-0.10/gst/gstplugin.h:
+
+/usr/include/gstreamer-0.10/gst/gstmacros.h:
+
+/usr/include/gstreamer-0.10/gst/gstpluginfeature.h:
+
+/usr/include/gstreamer-0.10/gst/gstindex.h:
+
+/usr/include/gstreamer-0.10/gst/gstindexfactory.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/object.h:
+
+/usr/include/libxml++-2.6/libxml++/nodes/node.h:
+
+/usr/include/libxml++-2.6/libxml++/noncopyable.h:
+
+/usr/include/libxml++-2.6/libxml++/exceptions/exception.h:
+
+/usr/lib/libxml++-2.6/include/libxml++config.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/clock.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/enums.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/error.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/event.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/miniobject.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/wrap.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/format.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/message.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/query.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/structure.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/value.h:
+
+/usr/include/gstreamer-0.10/gst/gstvalue.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/childproxy.h:
+
+/usr/include/gstreamer-0.10/gst/gstchildproxy.h:
+
+/usr/include/gstreamer-0.10/gst/gst.h:
+
+/usr/include/gstreamer-0.10/gst/gstenumtypes.h:
+
+/usr/include/gstreamer-0.10/gst/gstversion.h:
+
+/usr/include/gstreamer-0.10/gst/gstbin.h:
+
+/usr/include/gstreamer-0.10/gst/gstdebugutils.h:
+
+/usr/include/gstreamer-0.10/gst/gsterror.h:
+
+/usr/include/errno.h:
+
+/usr/include/bits/errno.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/i386-linux-gnu/asm/errno.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/gstreamer-0.10/gst/gstghostpad.h:
+
+/usr/include/gstreamer-0.10/gst/gstinfo.h:
+
+/usr/include/gstreamer-0.10/gst/gstinterface.h:
+
+/usr/include/gstreamer-0.10/gst/gstmarshal.h:
+
+/usr/include/gstreamer-0.10/gst/gstparamspecs.h:
+
+/usr/include/gstreamer-0.10/gst/gstpipeline.h:
+
+/usr/include/gstreamer-0.10/gst/gstpoll.h:
+
+/usr/include/gstreamer-0.10/gst/gstpreset.h:
+
+/usr/include/gstreamer-0.10/gst/gstregistry.h:
+
+/usr/include/gstreamer-0.10/gst/gstsegment.h:
+
+/usr/include/gstreamer-0.10/gst/gstsystemclock.h:
+
+/usr/include/gstreamer-0.10/gst/gsttagsetter.h:
+
+/usr/include/gstreamer-0.10/gst/gsttrace.h:
+
+/usr/include/gstreamer-0.10/gst/gsttypefind.h:
+
+/usr/include/gstreamer-0.10/gst/gsttypefindfactory.h:
+
+/usr/include/gstreamer-0.10/gst/gsturi.h:
+
+/usr/include/gstreamer-0.10/gst/gstutils.h:
+
+/usr/include/gstreamer-0.10/gst/gstparse.h:
+
+/usr/include/gstreamer-0.10/gst/gstxml.h:
+
+/usr/include/gstreamer-0.10/gst/gstcompat.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/pad.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/buffer.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/caps.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/bus.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/elementfactory.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/pluginfeature.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/filter.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/ghostpad.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/index.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/indexfactory.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/interface.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/iterator.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/handle_error.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/padtemplate.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/parse.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/pipeline.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/plugin.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/preset.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/registry.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/segment.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/systemclock.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/taglist.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/tagsetter.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/task.h:
+
+/usr/include/c++/4.5/memory:
+
+/usr/include/c++/4.5/bits/stl_raw_storage_iter.h:
+
+/usr/include/c++/4.5/backward/auto_ptr.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/taskpool.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/typefind.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/typefindfactory.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/urihandler.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/xml.h:
+
+/usr/include/libxml++-2.6/libxml++/document.h:
+
+/usr/include/libxml++-2.6/libxml++/exceptions/parse_error.h:
+
+/usr/include/libxml++-2.6/libxml++/exceptions/internal_error.h:
+
+/usr/include/libxml++-2.6/libxml++/nodes/element.h:
+
+/usr/include/libxml++-2.6/libxml++/attribute.h:
+
+/usr/include/libxml++-2.6/libxml++/nodes/commentnode.h:
+
+/usr/include/libxml++-2.6/libxml++/nodes/contentnode.h:
+
+/usr/include/libxml++-2.6/libxml++/dtd.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/basesink.h:
+
+/usr/include/gstreamer-0.10/gst/base/gstbasesink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/basesrc.h:
+
+/usr/include/gstreamer-0.10/gst/base/gstbasesrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/basetransform.h:
+
+/usr/include/gstreamer-0.10/gst/base/gstbasetransform.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/pushsrc.h:
+
+/usr/include/gstreamer-0.10/gst/base/gstpushsrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/audioclock.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/audiofilter.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/ringbuffer.h:
+
+/usr/include/gstreamer-0.10/gst/audio/gstringbuffer.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/audiosink.h:
+
+/usr/include/gstreamer-0.10/gst/audio/gstaudiosink.h:
+
+/usr/include/gstreamer-0.10/gst/audio/gstbaseaudiosink.h:
+
+/usr/include/gstreamer-0.10/gst/audio/gstringbuffer.h:
+
+/usr/include/gstreamer-0.10/gst/audio/gstaudioclock.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/baseaudiosink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/audiosrc.h:
+
+/usr/include/gstreamer-0.10/gst/audio/gstaudiosrc.h:
+
+/usr/include/gstreamer-0.10/gst/audio/gstbaseaudiosrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/baseaudiosrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/cddabasesrc.h:
+
+/usr/include/gstreamer-0.10/gst/cdda/gstcddabasesrc.h:
+
+/usr/include/gstreamer-0.10/gst/tag/tag.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/videosink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/colorbalance.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/colorbalance.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/colorbalancechannel.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/interfaces-enumtypes.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/colorbalancechannel.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/mixer.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/mixer.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/mixeroptions.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/mixertrack.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/mixertrack.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/mixeroptions.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/navigation.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/navigation.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/propertyprobe.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/propertyprobe.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/streamvolume.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/streamvolume.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/tuner.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/tuner.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/tunernorm.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/tunerchannel.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/tunerchannel.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/tunernorm.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/videoorientation.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/videoorientation.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/xoverlay.h:
+
+/usr/include/gstreamer-0.10/gst/interfaces/xoverlay.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/capsfilter.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/fakesrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/fakesink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/fdsink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/fdsrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/filesrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/filesink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/identity.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/multiqueue.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/queue.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/tee.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/typefindelement.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/adder.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/alsamixer.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/alsasink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/alsasrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/audioconvert.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/audioresample.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/audiotestsrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/cdparanoiasrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/clockoverlay.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/textoverlay.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/decodebin.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/decodebin2.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/ffmpegcolorspace.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/gdpdepay.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/gdppay.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/giosink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/giosrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/giostreamsink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/giostreamsrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/multifdsink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/oggdemux.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/oggmux.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/playbin.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/playbin2.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/tcpclientsrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/tcpclientsink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/tcpserversrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/tcpserversink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/textrender.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/theoradec.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/theoraenc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/theoraparse.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/timeoverlay.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/uridecodebin.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/videorate.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/videoscale.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/videotestsrc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/volume.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/vorbisdec.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/vorbisenc.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/vorbisparse.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/vorbistag.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/ximagesink.h:
+
+/usr/include/gstreamermm-0.10/gstreamermm/xvimagesink.h:
+
+/home/dcarrera/source/gtk3/audio-player/src/wav_in.h:
+
+/home/dcarrera/source/gtk3/audio-player/src/wav_out.h:
 
 ../config.h:
 
