@@ -31,18 +31,27 @@
 #include <bits/stringfwd.h>
 #endif
 
-#define UI_FILE "src/audio_player.ui"
 
-gchar* ui_file[] =
-  { "src/audio_player.ui", "src/audio_about.ui", "src/audio_fileChooser.ui" };
 
-Gtk::MenuItem* quit_item_menu;
+// global vars
+Glib::RefPtr<Gtk::Builder> builder;
+Gtk::MenuItem *quit_item_menu;
 Gtk::AboutDialog *aboutDialog = NULL;
 Gtk::FileChooserDialog *fileChooserDialog = NULL;
+std::string filename;
+Gtk::Button *buttonPlay, *buttonEffect1, *buttonEffect2, *buttonZoomIn, *buttonZoomOut; 
+
+// global interfaces vars
+gchar* ui_file[] =
+  { "src/audio_player.ui", "src/audio_about.ui", "src/audio_fileChooser.ui" };
 
 #define UI_MAIN 0
 #define UI_ABOUT 1
 #define UI_FILE_CHOOSER 2
+
+
+
+//******************** class Sound **************************
 
 class Sound
 {
@@ -58,18 +67,17 @@ class Sound
 	Glib::RefPtr<Gst::Element> m_sink;
 };
 
+  
 Sound::Sound()
 {
   m_pipeline = Gst::Pipeline::create("note");
-  m_source = Gst::ElementFactory::create_element("audiotestsrc",
-                                                 "source");
-  m_sink = Gst::ElementFactory::create_element("autoaudiosink",
-	                                             "output");
+  m_source = Gst::ElementFactory::create_element("audiotestsrc","source");
+  m_sink = Gst::ElementFactory::create_element("autoaudiosink","output");
   m_pipeline->add(m_source);
   m_pipeline->add(m_sink);
   m_source->link(m_sink);
 }
-
+// class function to play a sound
 void Sound::start_playing (double frequency)
 {
   m_source->set_property("freq", frequency);
@@ -79,44 +87,32 @@ void Sound::start_playing (double frequency)
 	Glib::signal_timeout().connect(sigc::mem_fun(*this, &Sound::stop_playing),200);
 }
 
+// class function to stop a sound
 bool Sound::stop_playing()
 {
   m_pipeline->set_state(Gst::STATE_NULL);
   return false;
 }
 
+
+//**********************************************
+
+
+
+//******************** FUNCTIONS OF MAIN **************************
+
+// function for a signal button  that play a sound
 static void
 on_button_clicked(double frequency, Sound* sound)
 {
   sound->start_playing (frequency);
-
-	
-}
-static void
-on_open_image(Gtk::Image* image)
-{
-  Gtk::FileChooserDialog dialog("Open image", Gtk::FILE_CHOOSER_ACTION_OPEN);
-  dialog.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_ACCEPT);
-  dialog.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-
-  switch (dialog.run())
-    {
-  case Gtk::RESPONSE_ACCEPT:
-    image->set(dialog.get_filename());
-    break;
-  default:
-    break;
-    }
-  dialog.hide();
 }
 
-
-
+// function to builder a UI
 static Glib::RefPtr<Gtk::Builder>
 get_builder(gint ui)
 {
   std::cout << "builder function activated" << std::endl;
-
   Glib::RefPtr<Gtk::Builder> builder;
   try
     {
@@ -137,7 +133,7 @@ get_builder(gint ui)
   return builder;
 }
 
-
+// function to get & close "about UI"
 static void about ()
 {
 
@@ -149,21 +145,36 @@ static void about ()
   aboutDialog->hide();	
 }
 
-static void file_chooser ()
+// function to get & close "choose UI"" 
+static int file_chooser ()
 {
+  int sw=0;
+  //get builder for UI_FILE_CHOOSER
   std::cout << "file Chooser function activated" << std::endl;
   Glib::RefPtr<Gtk::Builder> fileChooserBuilder;
   fileChooserBuilder = get_builder(UI_FILE_CHOOSER);
-  fileChooserBuilder->get_widget("fileChooserWindow", fileChooserDialog);
-  	
+  fileChooserBuilder->get_widget("fileChooserWindow", fileChooserDialog);  
+
+  //Add button accept & cancel
+  fileChooserDialog->add_button(Gtk::Stock::OPEN,Gtk::RESPONSE_ACCEPT);
+  fileChooserDialog->add_button(Gtk::Stock::CANCEL,Gtk::RESPONSE_CANCEL);
+
+  //Add filters, so that only certain file types can be selected:
+  Glib::RefPtr<Gtk::FileFilter> filter_wav = Gtk::FileFilter::create();
+  filter_wav->set_name("Wav files");
+  filter_wav->add_mime_type("audio/wav");
+  fileChooserDialog->add_filter(filter_wav);	
+	
   int result=fileChooserDialog->run();
 
-  switch(result)
-		
+  //get event for button on FileChooserDialog
+  switch(result)	
   {
     case(Gtk::RESPONSE_ACCEPT):
 	{
-      std::cout << "ENTRA" << std::endl;
+	  filename = fileChooserDialog->get_filename();
+	  std::cout << "File selected: " <<  filename << std::endl;
+	  sw=1;
 	  break;
 	}
     case(Gtk::RESPONSE_CANCEL):
@@ -179,27 +190,38 @@ static void file_chooser ()
 	}
 		  
   }
-
-  fileChooserDialog->hide();	
-	
+  fileChooserDialog->hide();
+  return sw;
 }
 
+// function to exit and kill application 
 static void
 destroy()
 {
   std::cout << "destroy function activated" << std::endl;
-	Gtk::Main::quit();
+  Gtk::Main::quit();
 }
 
-static void
-audio_open(){
-  std::cout << "audio_open function activated" << std::endl;
 
-  char *filename = "/home/dcarrera/source/gtk3/audio-player/src/file.wav";
-  WAV_IN  audio(filename);
+// function to choose and read structure of a wav file   
+static void audio_open(){
+  int result=0;
+  Sound sound;	
+  std::cout << "audio_open function activated" << std::endl;
+  result=file_chooser();
+	
+ // char *filename = "/home/dcarrera/source/gtk3/audio-player/src/file.wav";
+
+  if (result){
+  
+  char *cpFilename = new char[filename.size()+1];
+  strcpy(cpFilename,filename.c_str());
+
+  WAV_IN  audio(cpFilename);
   double sampleRate = audio.get_sample_rate_hz();
   unsigned int bitsPerSample = audio.get_bits_per_sample();
   unsigned int channels = audio.get_num_channels();
+	  
   WAV_OUT outfile(sampleRate, bitsPerSample, channels);
   while(audio.more_data_available()) {
     double data = audio.read_current_input();
@@ -207,56 +229,78 @@ audio_open(){
     //  to the data here.
     outfile.write_current_output(data);
   }
-  outfile.save_wave_file("/home/dcarrera/source/gtk3/audio-player/src/outfile.wav");
+
+	  
+  builder->get_widget("btnPlay", buttonPlay);
+  buttonPlay->set_sensitive (true);
+
+  builder->get_widget("btnZoomIn", buttonZoomIn);
+  buttonZoomIn->set_sensitive (true);
+
+  builder->get_widget("btnZoomOut", buttonZoomOut);
+  buttonZoomOut->set_sensitive (true);
+
+  builder->get_widget("btnEffect1", buttonEffect1);
+  buttonEffect1->set_sensitive (true);
+
+  builder->get_widget("btnEffect2", buttonEffect2);
+  buttonEffect2->set_sensitive (true);
+	  
+  //outfile.save_wave_file(filename);
+  buttonPlay->signal_clicked().connect (sigc::bind<double, Sound*>(sigc::ptr_fun(&on_button_clicked),
+	                                 369.23, &sound));	  
+  }
+  
+}
+
+static void save_as ()
+{
 
 }
 
 int
 main(int argc, char *argv[])
 {
-  //variables
-  Glib::RefPtr<Gtk::Builder> builder;
+  //local main vars 
   Gtk::Main kit(argc, argv);
   Gst::init (argc, argv);
-  Sound sound;
-  Gtk::Button* button;	
+  Gtk::MenuItem *quitMenuItem=0, *aboutMenuItem=0, *efectoMenuItem=0, 
+			    *openMenuItem=0, *saveMenuItem=0;
 
-  // call function get_builder for MAIN ui
+  //  call MAIN UI
   builder = get_builder(UI_MAIN);
-  Gtk::Window* main_win = 0;
+  Gtk::Window *main_win = 0;
   builder->get_widget("mainWindow", main_win);
 
-  //btn for sound
-  builder->get_widget("btnPlay", button);
-  button->signal_clicked().connect (sigc::bind<double, Sound*>(sigc::ptr_fun(&on_button_clicked),
-	                                 369.23, &sound));
-
- // builder->get_widget("btnLoad",button);
- // button->signal_clicked().connect (sigc::bind<Gtk::Image*>(sigc::ptr_fun(&on_open_image), image));
-	
+  // signals for menu	
   if (main_win)
     {
-      Gtk::MenuItem* quitMenuItem=0, *aboutMenuItem=0, *efectoMenuItem=0, *openMenuItem=0;
+      
       builder->get_widget("quit_item_menu",quitMenuItem);
       builder->get_widget("open_item_menu",openMenuItem);
       builder->get_widget("acerca_item_menu",aboutMenuItem);
       builder->get_widget("efecto1_item_menu",efectoMenuItem);
-      if(quitMenuItem)
-        {
-          quitMenuItem->signal_activate().connect(sigc::ptr_fun(&destroy));
-        }
-      if(aboutMenuItem)
-        {
-          aboutMenuItem->signal_activate().connect(sigc::ptr_fun(&about));
-        }
-      if(efectoMenuItem)
-        {
-          efectoMenuItem->signal_activate().connect(sigc::ptr_fun(&audio_open));
-        }
+	  builder->get_widget("save_item_menu",saveMenuItem);
+		
       if(openMenuItem)
-        {
-          openMenuItem->signal_activate().connect(sigc::ptr_fun(&file_chooser));
-        }		
+      {
+        openMenuItem->signal_activate().connect(sigc::ptr_fun(&audio_open));
+      }		
+      if(saveMenuItem)
+      {
+        saveMenuItem->signal_activate().connect(sigc::ptr_fun(&save_as));				
+      }
+      if(quitMenuItem)
+      {
+        quitMenuItem->signal_activate().connect(sigc::ptr_fun(&destroy));
+      }
+
+		
+      if(aboutMenuItem)
+      {
+        aboutMenuItem->signal_activate().connect(sigc::ptr_fun(&about));
+      }
+		
 
       kit.run(*main_win);
     }

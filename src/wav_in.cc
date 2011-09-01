@@ -124,7 +124,7 @@ WAV_IN::WAV_IN(char *file_name)
     }
 
   /* open wav file */
-  printf("nombre %s\n",file_name);
+  //printf("nombre %s\n",file_name);
   fw = fopen(file_name, "rb");
   if (fw == NULL)
     {
@@ -284,7 +284,7 @@ WAV_IN::WAV_IN(char *file_name)
   bits_per_sample = wav->nBitsPerSample;
   num_ch = wav->nChannels;
 
-  printf("\nLoaded WAV File: %s\n", file_name);
+  //printf("\nLoaded WAV File: %s\n", file_name);
   printf(" Sample Rate = %1.0lf (Hz)\n", fs_hz);
   printf(" Number of Samples = %ld\n", g_max_isamp);
   printf(" Bits Per Sample = %d\n", bits_per_sample);

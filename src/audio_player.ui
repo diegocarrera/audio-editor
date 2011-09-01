@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkImage" id="image1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-new</property>
-  </object>
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -57,16 +52,6 @@
                     <property name="can_focus">False</property>
                     <property name="ubuntu_local">True</property>
                     <child>
-                      <object class="GtkImageMenuItem" id="new_item_menu">
-                        <property name="label">Nuevo</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="image">image1</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkImageMenuItem" id="open_item_menu">
                         <property name="label">Abrir</property>
                         <property name="visible">True</property>
@@ -102,31 +87,6 @@
                         <property name="image">image4</property>
                         <property name="use_stock">False</property>
                         <signal name="activate" handler="destroy" swapped="no"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="menuEfectoa">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="use_action_appearance">False</property>
-                <property name="label" translatable="yes">_Ver</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="menuEfectoGroup">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="ubuntu_local">True</property>
-                    <child>
-                      <object class="GtkMenuItem" id="efecto1_item_menu">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="label" translatable="yes">efecto1</property>
-                        <property name="use_underline">True</property>
                       </object>
                     </child>
                   </object>
@@ -188,37 +148,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="n_rows">1</property>
-                        <property name="n_columns">7</property>
-                        <child>
-                          <object class="GtkButton" id="btnOpen">
-                            <property name="label" translatable="yes">Open</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="use_action_appearance">False</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="btnSaveAs">
-                            <property name="label" translatable="yes">Save as</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="use_action_appearance">False</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">0</property>
-                            <property name="width">1</property>
-                            <property name="height">1</property>
-                          </packing>
-                        </child>
+                        <property name="n_columns">5</property>
                         <child>
                           <object class="GtkButton" id="btnPlay">
                             <property name="label" translatable="yes">Play</property>
@@ -228,7 +158,7 @@
                             <property name="use_action_appearance">False</property>
                           </object>
                           <packing>
-                            <property name="left_attach">2</property>
+                            <property name="left_attach">0</property>
                             <property name="top_attach">0</property>
                             <property name="width">1</property>
                             <property name="height">1</property>
@@ -243,7 +173,7 @@
                             <property name="use_action_appearance">False</property>
                           </object>
                           <packing>
-                            <property name="left_attach">3</property>
+                            <property name="left_attach">1</property>
                             <property name="top_attach">0</property>
                             <property name="width">1</property>
                             <property name="height">1</property>
@@ -258,7 +188,7 @@
                             <property name="use_action_appearance">False</property>
                           </object>
                           <packing>
-                            <property name="left_attach">4</property>
+                            <property name="left_attach">2</property>
                             <property name="top_attach">0</property>
                             <property name="width">1</property>
                             <property name="height">1</property>
@@ -273,7 +203,7 @@
                             <property name="use_action_appearance">False</property>
                           </object>
                           <packing>
-                            <property name="left_attach">5</property>
+                            <property name="left_attach">3</property>
                             <property name="top_attach">0</property>
                             <property name="width">1</property>
                             <property name="height">1</property>
@@ -288,7 +218,7 @@
                             <property name="use_action_appearance">False</property>
                           </object>
                           <packing>
-                            <property name="left_attach">6</property>
+                            <property name="left_attach">4</property>
                             <property name="top_attach">0</property>
                             <property name="width">1</property>
                             <property name="height">1</property>
