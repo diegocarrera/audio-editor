@@ -1,3 +1,5 @@
 .idea/*
 Debug/*
-.anjuta
+.anjuta*
+.anjuta_sym_db.db
+

@@ -20,6 +20,7 @@
 #include <gtkmm.h>
 #include <iostream>
 #include <gstreamermm.h>
+#include <iomanip>
 
 #include "wav_in.h"
 #include "wav_out.h"
@@ -40,6 +41,13 @@ Gtk::AboutDialog *aboutDialog = NULL;
 Gtk::FileChooserDialog *fileChooserDialog = NULL;
 std::string filename;
 Gtk::Button *buttonPlay, *buttonEffect1, *buttonEffect2, *buttonZoomIn, *buttonZoomOut; 
+Gtk::MenuItem *quitMenuItem=0, *aboutMenuItem=0, *openMenuItem=0, *saveMenuItem=0;
+
+Glib::RefPtr<Glib::MainLoop> mainloop;
+Glib::RefPtr<Gst::Pipeline> pipeline;
+Glib::RefPtr<Gst::Element> decoder;
+gulong data_probe_id = 0;
+
 
 // global interfaces vars
 gchar* ui_file[] =
@@ -49,64 +57,213 @@ gchar* ui_file[] =
 #define UI_ABOUT 1
 #define UI_FILE_CHOOSER 2
 
-
-
-//******************** class Sound **************************
-
-class Sound
-{
-  public:
-	Sound();
-
-	void start_playing(double frequency);
-	bool stop_playing();
-		
-  private:
-	Glib::RefPtr<Gst::Pipeline> m_pipeline;
-	Glib::RefPtr<Gst::Element> m_source;
-	Glib::RefPtr<Gst::Element> m_sink;
-};
-
-  
-Sound::Sound()
-{
-  m_pipeline = Gst::Pipeline::create("note");
-  m_source = Gst::ElementFactory::create_element("audiotestsrc","source");
-  m_sink = Gst::ElementFactory::create_element("autoaudiosink","output");
-  m_pipeline->add(m_source);
-  m_pipeline->add(m_sink);
-  m_source->link(m_sink);
-}
-// class function to play a sound
-void Sound::start_playing (double frequency)
-{
-  m_source->set_property("freq", frequency);
-  m_pipeline->set_state(Gst::STATE_PLAYING);
-
-  /* stop it after 200ms */
-	Glib::signal_timeout().connect(sigc::mem_fun(*this, &Sound::stop_playing),200);
-}
-
-// class function to stop a sound
-bool Sound::stop_playing()
-{
-  m_pipeline->set_state(Gst::STATE_NULL);
-  return false;
-}
-
-
 //**********************************************
-
-
-
-//******************** FUNCTIONS OF MAIN **************************
-
-// function for a signal button  that play a sound
-static void
-on_button_clicked(double frequency, Sound* sound)
+static bool on_timeout()
 {
-  sound->start_playing (frequency);
+  Gst::Format fmt = Gst::FORMAT_TIME;
+  gint64 pos = 0;
+  gint64 len = 0;
+
+  Glib::RefPtr<Gst::Query> query = Gst::QueryPosition::create(fmt);
+
+  if(pipeline->query(query)
+    && pipeline->query_duration(fmt, len))
+  {
+    // Cast query's RefPtr to RefPtr<Gst::QueryPosition> to parse the
+    // pipeline's position query with the Gst::QueryPosition::parse() method
+    Glib::RefPtr<Gst::QueryPosition> query_pos = Glib::RefPtr<Gst::QueryPosition>::cast_dynamic(query);
+    if(query_pos)
+      pos = query_pos->parse();
+
+    std::cout << std::right << "Time: " << std::setfill('0') <<
+      std::setw(3) << Gst::get_hours(pos) << ":" <<
+      std::setw(2) << Gst::get_minutes(pos) << ":" <<
+      std::setw(2) << Gst::get_seconds(pos) << "." <<
+      std::setw(9) << std::left << Gst::get_fractional_seconds(pos);
+
+    std::cout << std::right << "/" <<
+      std::setw(3) << Gst::get_hours(len) << ":" <<
+      std::setw(2) << Gst::get_minutes(len) << ":" <<
+      std::setw(2) << Gst::get_seconds(len) << "." <<
+      std::setw(9) << std::left << Gst::get_fractional_seconds(len) <<
+      std::endl << std::flush;
+  }
+
+  return true;
 }
+
+
+// This function is used to receive asynchronous messages in the main loop.
+static bool on_bus_message(const Glib::RefPtr<Gst::Bus>& /* bus */, const Glib::RefPtr<Gst::Message>& message)
+{
+  switch(message->get_message_type()) {
+    case Gst::MESSAGE_EOS:
+      std::cout << std::endl << "End of stream" << std::endl;
+      mainloop->quit();
+      return false;
+    case Gst::MESSAGE_ERROR:
+    {
+      Glib::RefPtr<Gst::MessageError> msgError = Glib::RefPtr<Gst::MessageError>::cast_dynamic(message);
+      if(msgError)
+      {
+        Glib::Error err;
+        err = msgError->parse();
+        std::cerr << "Error: " << err.what() << std::endl;
+      }
+      else
+        std::cerr << "Error." << std::endl;
+
+      mainloop->quit();
+      return false;
+    }
+    default:
+    {
+      //std::cout << "debug: on_bus_message: unhandled message=" << G_OBJECT_TYPE_NAME(message->gobj()) << std::endl;
+    }
+      break;
+  }
+
+  return true;
+}
+
+static void on_parser_pad_added(const Glib::RefPtr<Gst::Pad>& newPad)
+{
+  // We can now link this pad with the audio decoder
+  std::cout << "Dynamic pad created. Linking parser/decoder." << std::endl;
+  Glib::RefPtr<Gst::Pad> sinkPad = decoder->get_static_pad("sink");
+  Gst::PadLinkReturn ret = newPad->link(sinkPad);
+
+  if (ret != Gst::PAD_LINK_OK && ret != Gst::PAD_LINK_WAS_LINKED)
+  {
+    std::cerr << "Linking of pads " << newPad->get_name() << " and " <<
+      sinkPad->get_name() << " failed." << std::endl;
+  }
+}
+
+static bool on_sink_pad_have_data(const Glib::RefPtr<Gst::Pad>& pad,
+        const Glib::RefPtr<Gst::MiniObject>& data)
+{
+  std::cout << "Sink pad '" << pad->get_name() << "' has received data;";
+  std::cout << " will now remove sink data probe id: " << data_probe_id << std::endl;
+  pad->remove_data_probe(data_probe_id);
+  return true;
+}
+
+static void playWav ()
+{
+  std::cout << "Wav to play: " <<  filename << std::endl;
+
+  mainloop = Glib::MainLoop::create();
+
+  // Create the pipeline:
+  pipeline = Gst::Pipeline::create("audio-player");
+
+  // Create the elements:
+  // filsrc reads the file from disk:
+  Glib::RefPtr<Gst::Element> source = Gst::ElementFactory::create_element("filesrc");
+  if(!source)
+    std::cerr << "filesrc element could not be created." << std::endl;
+
+  // wavparse into elementary streams (audio and video):
+  Glib::RefPtr<Gst::Element> parser = Gst::ElementFactory::create_element("wavparse");
+  if(!parser)
+    std::cerr << "oggdemux element could not be created." << std::endl;
+
+  // identity decodes a vorbis (audio) stream:
+ decoder = Gst::ElementFactory::create_element("identity");
+  if(!decoder)
+    std::cerr << "vorbisdec element could not be created." << std::endl;
+
+  // audioconvert converts raw audio to a format which can be used by the next element
+  Glib::RefPtr<Gst::Element> conv = Gst::ElementFactory::create_element("audioconvert");
+  if(!conv)
+    std::cerr << "audioconvert element could not be created." << std::endl;
+
+  // Outputs sound to an ALSA audio device
+  Glib::RefPtr<Gst::Element> sink = Gst::ElementFactory::create_element("alsasink");
+  if(!sink)
+    std::cerr << "alsasink element could not be created." << std::endl;
+
+  //Check that the elements were created:
+  if(!pipeline || !source || !parser || !decoder || !conv || !sink)
+  {
+    std::cerr << "One element could not be created" << std::endl;
+    return;
+  }
+
+  Glib::RefPtr<Gst::Pad> pad = sink->get_static_pad("sink");
+  if(pad)
+    data_probe_id = pad->add_data_probe( sigc::ptr_fun(&on_sink_pad_have_data) );
+	
+  //std::cout << "sink data probe id = " << data_probe_id << std::endl;
+
+  source->set_property("location", filename);
+
+  // Get the bus from the pipeline, 
+  // and add a bus watch to the default main context with the default priority:
+  Glib::RefPtr<Gst::Bus> bus = pipeline->get_bus();
+  bus->add_watch( sigc::ptr_fun(&on_bus_message) );
+
+
+  // Put all the elements in a pipeline:
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  try
+  {
+#endif
+    pipeline->add(source)->add(parser)->add(decoder)->add(conv)->add(sink);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  }
+  catch(const Glib::Error& ex)
+  {
+    std::cerr << "Error while adding elements to the pipeline: " << ex.what() << std::endl;
+    return;
+  }
+#endif
+
+  // Link the elements together:
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  try
+  {
+#endif
+    source->link(parser);
+
+    // We cannot link the parser and decoder yet, 
+    // because the parser uses dynamic pads.
+    // So we do it later in a pad-added signal handler:
+    parser->signal_pad_added().connect( sigc::ptr_fun(&on_parser_pad_added) );
+
+    decoder->link(conv)->link(sink);
+#ifdef GLIBMM_EXCEPTIONS_ENABLED
+  }
+  catch(const std::runtime_error& ex)
+  {
+    std::cout << "Exception while linking elements: " << ex.what() << std::endl;
+  }
+#endif
+
+  // Call on_timeout function at a 200ms
+  // interval to regularly print the position of the stream
+  Glib::signal_timeout().connect(sigc::ptr_fun(&on_timeout), 200);
+
+  // Now set the whole pipeline to playing and start the main loop:
+  std::cout << "Setting to PLAYING." << std::endl;
+  pipeline->set_state(Gst::STATE_PLAYING);
+  std::cout << "Running." << std::endl;
+  mainloop->run();
+
+  // Clean up nicely:
+  std::cout << "Returned. Stopping playback." << std::endl;
+  pipeline->set_state(Gst::STATE_NULL);	
+
+  return;
+}
+
+
+
+
+
+//******************** GTK BASIC FUNCTIONS OF MAIN CLASS **************************
+
 
 // function to builder a UI
 static Glib::RefPtr<Gtk::Builder>
@@ -187,8 +344,7 @@ static int file_chooser ()
       printf("value es:%i\n",result);
 	  std::cout << "Unexpected button clicked." << std::endl;
 	  break;
-	}
-		  
+	}	  
   }
   fileChooserDialog->hide();
   return sw;
@@ -202,16 +358,18 @@ destroy()
   Gtk::Main::quit();
 }
 
+static void printer()
+{
+  std::cout << "imprime activated" << std::endl;	
+}
+
 
 // function to choose and read structure of a wav file   
 static void audio_open(){
   int result=0;
-  Sound sound;	
   std::cout << "audio_open function activated" << std::endl;
   result=file_chooser();
 	
- // char *filename = "/home/dcarrera/source/gtk3/audio-player/src/file.wav";
-
   if (result){
   
   char *cpFilename = new char[filename.size()+1];
@@ -221,7 +379,28 @@ static void audio_open(){
   double sampleRate = audio.get_sample_rate_hz();
   unsigned int bitsPerSample = audio.get_bits_per_sample();
   unsigned int channels = audio.get_num_channels();
-	  
+
+  saveMenuItem->set_sensitive();
+  buttonPlay->set_sensitive (); 
+  buttonZoomIn->set_sensitive ();
+  buttonZoomOut->set_sensitive ();
+  buttonEffect1->set_sensitive ();
+  buttonEffect2->set_sensitive ();
+
+
+  }
+}
+
+static void save_as ()
+{
+  char *cpFilename = new char[filename.size()+1];
+  strcpy(cpFilename,filename.c_str());
+	
+  WAV_IN  audio(cpFilename);
+  double sampleRate = audio.get_sample_rate_hz();
+  unsigned int bitsPerSample = audio.get_bits_per_sample();
+  unsigned int channels = audio.get_num_channels();	
+
   WAV_OUT outfile(sampleRate, bitsPerSample, channels);
   while(audio.more_data_available()) {
     double data = audio.read_current_input();
@@ -229,33 +408,8 @@ static void audio_open(){
     //  to the data here.
     outfile.write_current_output(data);
   }
-
-	  
-  builder->get_widget("btnPlay", buttonPlay);
-  buttonPlay->set_sensitive (true);
-
-  builder->get_widget("btnZoomIn", buttonZoomIn);
-  buttonZoomIn->set_sensitive (true);
-
-  builder->get_widget("btnZoomOut", buttonZoomOut);
-  buttonZoomOut->set_sensitive (true);
-
-  builder->get_widget("btnEffect1", buttonEffect1);
-  buttonEffect1->set_sensitive (true);
-
-  builder->get_widget("btnEffect2", buttonEffect2);
-  buttonEffect2->set_sensitive (true);
-	  
-  //outfile.save_wave_file(filename);
-  buttonPlay->signal_clicked().connect (sigc::bind<double, Sound*>(sigc::ptr_fun(&on_button_clicked),
-	                                 369.23, &sound));	  
-  }
-  
-}
-
-static void save_as ()
-{
-
+	
+  outfile.save_wave_file (cpFilename);
 }
 
 int
@@ -264,14 +418,29 @@ main(int argc, char *argv[])
   //local main vars 
   Gtk::Main kit(argc, argv);
   Gst::init (argc, argv);
-  Gtk::MenuItem *quitMenuItem=0, *aboutMenuItem=0, *efectoMenuItem=0, 
-			    *openMenuItem=0, *saveMenuItem=0;
 
   //  call MAIN UI
   builder = get_builder(UI_MAIN);
   Gtk::Window *main_win = 0;
   builder->get_widget("mainWindow", main_win);
 
+  
+  builder->get_widget("btnPlay", buttonPlay);
+  buttonPlay->signal_clicked().connect(sigc::ptr_fun(&playWav));	
+           
+  builder->get_widget("btnZoomIn", buttonZoomIn);
+  buttonZoomIn->signal_clicked().connect(sigc::ptr_fun(&printer));
+
+  builder->get_widget("btnZoomOut", buttonZoomOut);
+  buttonZoomOut->signal_clicked().connect(sigc::ptr_fun(&printer));
+
+  builder->get_widget("btnEffect1", buttonEffect1);
+  buttonEffect1->signal_clicked().connect(sigc::ptr_fun(&printer));
+	  
+  builder->get_widget("btnEffect2", buttonEffect2);
+  buttonEffect2->signal_clicked().connect(sigc::ptr_fun(&printer));
+	      
+	
   // signals for menu	
   if (main_win)
     {
@@ -279,7 +448,6 @@ main(int argc, char *argv[])
       builder->get_widget("quit_item_menu",quitMenuItem);
       builder->get_widget("open_item_menu",openMenuItem);
       builder->get_widget("acerca_item_menu",aboutMenuItem);
-      builder->get_widget("efecto1_item_menu",efectoMenuItem);
 	  builder->get_widget("save_item_menu",saveMenuItem);
 		
       if(openMenuItem)
@@ -294,8 +462,6 @@ main(int argc, char *argv[])
       {
         quitMenuItem->signal_activate().connect(sigc::ptr_fun(&destroy));
       }
-
-		
       if(aboutMenuItem)
       {
         aboutMenuItem->signal_activate().connect(sigc::ptr_fun(&about));

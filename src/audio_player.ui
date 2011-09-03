@@ -65,6 +65,7 @@
                       <object class="GtkImageMenuItem" id="save_item_menu">
                         <property name="label">Guardar</property>
                         <property name="visible">True</property>
+                        <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="use_action_appearance">False</property>
                         <property name="image">image3</property>
@@ -153,6 +154,7 @@
                           <object class="GtkButton" id="btnPlay">
                             <property name="label" translatable="yes">Play</property>
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="use_action_appearance">False</property>
@@ -168,6 +170,7 @@
                           <object class="GtkButton" id="btnZoomIn">
                             <property name="label" translatable="yes">Zoom(+)</property>
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="use_action_appearance">False</property>
@@ -183,6 +186,7 @@
                           <object class="GtkButton" id="btnZoomOut">
                             <property name="label" translatable="yes">Zoom(-)</property>
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="use_action_appearance">False</property>
@@ -198,6 +202,7 @@
                           <object class="GtkButton" id="btnEffect1">
                             <property name="label" translatable="yes">Effect1</property>
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="use_action_appearance">False</property>
@@ -213,6 +218,7 @@
                           <object class="GtkButton" id="btnEffect2">
                             <property name="label" translatable="yes">Effect2</property>
                             <property name="visible">True</property>
+                            <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="use_action_appearance">False</property>
