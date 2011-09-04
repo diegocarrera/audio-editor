@@ -36,7 +36,7 @@ typedef struct{
 typedef struct{
    char dId[4];            // 'data' or 'fact', 4 bits (36-40)
    long int dLen;          // 4 bits (40-44)
-   //unsigned char *data;    
+   unsigned char *data;    
 }   CHUNK_HDR;
 
 

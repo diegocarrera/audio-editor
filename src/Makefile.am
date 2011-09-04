@@ -4,7 +4,9 @@
 
 
 uidir = $(datadir)/audio_player/ui
-ui_DATA = audio_player.ui
+ui_DATA = audio_player.ui \
+	audio_about.ui \
+	audio_fileChooser.ui
 
 
 AM_CPPFLAGS = \
@@ -22,7 +24,12 @@ bin_PROGRAMS = audio_player
 audio_player_SOURCES = \
 	wav_in.cc \
 	wav_out.cc \
-	main.cc	
+	main.cc \
+	f_err.h \
+	f_ptch.h \
+	wav_def.h \
+	wav_in.h \
+	wav_out.h	
 
 audio_player_LDFLAGS = 
 

@@ -84,7 +84,19 @@ WAV_IN::read_current_input()
 
 /********************************************\
 \********************************************/
-WAV_IN::WAV_IN(char *file_name)
+
+int 
+WAV_IN::get_data_size(){
+  return wbuff_len;
+}
+
+
+
+
+
+
+int
+WAV_IN::set_filename(char *file_name)
 {
   int i;
   FILE *fw;
@@ -99,7 +111,7 @@ WAV_IN::WAV_IN(char *file_name)
   long int rmore;
 
   char *wbuff;
-  int wbuff_len;
+  // wbuff_len;
 
   // set defaults
   g_wdata_in = NULL;
@@ -132,7 +144,7 @@ WAV_IN::WAV_IN(char *file_name)
       exit(-1);
     }
 
-  /* read riff/wav header from wav file */
+  /* read riff/wav header from wav file, with the size of WAV_HDR */ 
   wstat = fread((void *) wav, sizeof(WAV_HDR), (size_t) 1, fw);
   if (wstat != 1)
     {
@@ -141,7 +153,7 @@ WAV_IN::WAV_IN(char *file_name)
     }
 
   // check format of header from wav file
-  // more información about the wav file header
+  // more information about the wav file header
   // see on http://www.sonicspot.com/guide/wavefiles.html
   // from wav file header, compare 4 bits with RIFF value, from rID header
   for (i = 0; i < 4; i++)
@@ -173,14 +185,14 @@ WAV_IN::WAV_IN(char *file_name)
       exit(-1);
     }
 
-  //NO SE DE DONDE SALE ESTE dato <--------------- ojo ...
+  // read the structure WAV_HDR
   if (wav->wFormatTag != 1)
     {
       printf("bad wav wFormatTag\n");
       exit(-1);
     }
 
-  //NO SE DE DONDE SALE ESTE dato <--------------- ojo ...
+  // read the structure WAV_HDR
   if ((wav->nBitsPerSample != 16) && (wav->nBitsPerSample != 8))
     {
       printf("bad wav nBitsPerSample\n");
@@ -223,7 +235,7 @@ WAV_IN::WAV_IN(char *file_name)
       if (strcmp(obuff, "data") == 0)
         break;
 
-      // skip over chunk
+      // skip data of chunk
       sflag++;
       wstat = fseek(fw, chk->dLen, SEEK_CUR);
       if (wstat != 0)
@@ -231,10 +243,13 @@ WAV_IN::WAV_IN(char *file_name)
           printf("cant seek\n");
           exit(-1);
         }
+
+     
     }
 
   /* find length of remaining data */
   wbuff_len = chk->dLen;
+  printf("wbuff_len size is: %i\n",wbuff_len);
 
   // find number of samples
   g_max_isamp = chk->dLen;
@@ -265,6 +280,7 @@ WAV_IN::WAV_IN(char *file_name)
       exit(-1);
     }
 
+
   // convert data
   if (wav->nBitsPerSample == 16)
     {
@@ -272,7 +288,7 @@ WAV_IN::WAV_IN(char *file_name)
       for (i = 0; i < g_max_isamp; i++)
         g_wdata_in[i] = (double) (uptr[i]);
     }
-  else
+  else  // 8 bits 
     {
       cptr = (unsigned char *) wbuff;
       for (i = 0; i < g_max_isamp; i++)
@@ -300,14 +316,45 @@ WAV_IN::WAV_IN(char *file_name)
     delete wav;
   if (chk != NULL)
     delete chk;
-  fclose(fw);
+  fclose(fw); 
 
+ return 0;
+}
+
+
+
+/********************************************\
+\********************************************/
+
+WAV_IN:: WAV_IN() {
+  // Default Constructor
+  char *filename = NULL;
+  //init samples
+  long int  g_max_isamp = 0;
+  // init number of channels (0== null, 1==mono, 2==stereo)
+  int num_ch=0;
+  // init the number of bits in each sample
+  int bits_per_sample =0;
+  
+  int fs_hz = 0;
+
+}
+
+
+
+
+// CONTRUCTOR CON UN PARAMETRO
+WAV_IN::WAV_IN(char *file_name) //constructor with one parameter
+{
+
+  set_filename(file_name);
   return;
 
   /* WAV_IN::WAV_IN() */}
 
 /********************************************\
 \********************************************/
+// DESTRUCTOR
 WAV_IN::~WAV_IN()
 {
 }

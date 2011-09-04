@@ -21,6 +21,7 @@
 #include <iostream>
 #include <gstreamermm.h>
 #include <iomanip>
+#include <stdlib.h>
 
 #include "wav_in.h"
 #include "wav_out.h"
@@ -31,7 +32,6 @@
 #  include <libintl.h>
 #include <bits/stringfwd.h>
 #endif
-
 
 
 // global vars
@@ -47,6 +47,7 @@ Glib::RefPtr<Glib::MainLoop> mainloop;
 Glib::RefPtr<Gst::Pipeline> pipeline;
 Glib::RefPtr<Gst::Element> decoder;
 gulong data_probe_id = 0;
+WAV_IN audio;
 
 
 // global interfaces vars
@@ -198,6 +199,7 @@ static void playWav ()
   //std::cout << "sink data probe id = " << data_probe_id << std::endl;
 
   source->set_property("location", filename);
+  source->set_property("freq", 44000);
 
   // Get the bus from the pipeline, 
   // and add a bus watch to the default main context with the default priority:
@@ -233,6 +235,7 @@ static void playWav ()
     parser->signal_pad_added().connect( sigc::ptr_fun(&on_parser_pad_added) );
 
     decoder->link(conv)->link(sink);
+	  
 #ifdef GLIBMM_EXCEPTIONS_ENABLED
   }
   catch(const std::runtime_error& ex)
@@ -259,6 +262,93 @@ static void playWav ()
 }
 
 
+static void play2()
+{
+	//ca_gtk_play_for_widget(buttonZoomIn);   
+	
+ system("canberra-gtk-play -f /home/dcarrera/source/gtk3/gtk-tempo/Debug/src/file.wav");
+}
+
+static void echoEffect()
+{
+  std::cout << "Echo effect activated" << std::endl;	
+  gint i=0,j;
+  gdouble delay =1000;
+  gdouble decay =0.5;
+	
+  int channels = audio.get_num_channels();
+  int nSamples = audio.get_num_samples ();
+  int sizeData = audio.get_data_size();
+
+  double sampleRate = audio.get_sample_rate_hz();
+  unsigned int bitsPerSample = audio.get_bits_per_sample();
+
+  unsigned char newData[sizeData], tempData[sizeData];
+
+  printf ("channels is: %d, nSamples: is %d, sizeData is: %d\n", channels,nSamples,sizeData);
+  while(audio.more_data_available()){
+	 tempData[i]=audio.read_current_input();
+	 i++;
+  }
+  printf ("contado es : %d\n", i);
+	
+
+  for (i=0; i<channels; i++){
+	for (j=1;j<(delay+1);j++){
+      newData[i*channels+j]= tempData[i*channels+j];
+		
+	}
+	for (j=(delay+1);j<nSamples;j++){
+	  newData[i*channels+j]= tempData[i*channels+j]; + decay *tempData[i*channels+j-1000];
+	}
+  }	
+
+  WAV_OUT outfile(sampleRate, bitsPerSample, channels);
+
+  for (i=0;i<sizeData;i++){
+    outfile.write_current_output(newData[i]);
+  }
+
+	/*
+	while(audio.more_data_available()) {
+    double data = audio.read_current_input();
+    // If this were a real application, you'd probably do something
+    //  to the data here.
+    outfile.write_current_output(data);
+  }
+	*/
+	
+  outfile.save_wave_file ("/home/dcarrera/source/gtk3/audio-player/Debug/src/file2.wav");  	
+  
+		
+/*
+// gdouble intensity=0.6;
+ // gdouble feedback=0.4;
+* 
+  for (i = 0; i < nSamples; i++) { 
+    //guint echo0_index = ((echo_index + self->buffer_pos) % self->buffer_size_frames) * channels; 
+	//guint rbout_index = (self->buffer_pos % self->buffer_size_frames) * channels; 
+
+	  for (j = 0; j < channels; j++) {   
+      gdouble in = data[i*nSamples + j];
+      gdouble echo = buffer[echo0_index + j]; 
+      type out = in + intensity; 
+      data[i*channels + j] = out; 
+      buffer[rbout_index + j] = in + feedback * echo; 
+    } 
+    self->buffer_pos = (self->buffer_pos + 1) % self->buffer_size_frames;  
+  } 	
+
+
+*/
+
+	
+
+  
+
+  std::cout << "Echo effect applied" << std::endl;
+
+}
 
 
 
@@ -366,30 +456,33 @@ static void printer()
 
 // function to choose and read structure of a wav file   
 static void audio_open(){
-  int result=0;
+	int result=0;
+    char *cpFilename;
+		
   std::cout << "audio_open function activated" << std::endl;
   result=file_chooser();
 	
   if (result){
-  
-  char *cpFilename = new char[filename.size()+1];
-  strcpy(cpFilename,filename.c_str());
+    char *cpFilename = new char[filename.size()+1];
+    strcpy(cpFilename,filename.c_str());
 
-  WAV_IN  audio(cpFilename);
-  double sampleRate = audio.get_sample_rate_hz();
-  unsigned int bitsPerSample = audio.get_bits_per_sample();
-  unsigned int channels = audio.get_num_channels();
+    if (audio.set_filename(cpFilename)){
+      std::cout << "coulnt open file" << std::endl;	
+	}
 
-  saveMenuItem->set_sensitive();
-  buttonPlay->set_sensitive (); 
-  buttonZoomIn->set_sensitive ();
-  buttonZoomOut->set_sensitive ();
-  buttonEffect1->set_sensitive ();
-  buttonEffect2->set_sensitive ();
+	double sampleRate = audio.get_sample_rate_hz();      
+    unsigned int bitsPerSample = audio.get_bits_per_sample();
+    unsigned int channels = audio.get_num_channels();
 
-
+    saveMenuItem->set_sensitive();
+    buttonPlay->set_sensitive (); 
+    buttonZoomIn->set_sensitive ();
+    buttonZoomOut->set_sensitive ();
+    buttonEffect1->set_sensitive ();
+    buttonEffect2->set_sensitive ();
   }
 }
+
 
 static void save_as ()
 {
@@ -397,9 +490,12 @@ static void save_as ()
   strcpy(cpFilename,filename.c_str());
 	
   WAV_IN  audio(cpFilename);
+	
   double sampleRate = audio.get_sample_rate_hz();
   unsigned int bitsPerSample = audio.get_bits_per_sample();
-  unsigned int channels = audio.get_num_channels();	
+  unsigned int channels = audio.get_num_channels();
+
+	
 
   WAV_OUT outfile(sampleRate, bitsPerSample, channels);
   while(audio.more_data_available()) {
@@ -429,13 +525,13 @@ main(int argc, char *argv[])
   buttonPlay->signal_clicked().connect(sigc::ptr_fun(&playWav));	
            
   builder->get_widget("btnZoomIn", buttonZoomIn);
-  buttonZoomIn->signal_clicked().connect(sigc::ptr_fun(&printer));
+  buttonZoomIn->signal_clicked().connect(sigc::ptr_fun(&play2));
 
   builder->get_widget("btnZoomOut", buttonZoomOut);
   buttonZoomOut->signal_clicked().connect(sigc::ptr_fun(&printer));
 
   builder->get_widget("btnEffect1", buttonEffect1);
-  buttonEffect1->signal_clicked().connect(sigc::ptr_fun(&printer));
+  buttonEffect1->signal_clicked().connect(sigc::ptr_fun(&echoEffect));
 	  
   builder->get_widget("btnEffect2", buttonEffect2);
   buttonEffect2->signal_clicked().connect(sigc::ptr_fun(&printer));

@@ -24,7 +24,7 @@ class WAV_IN
 {
 
 public:
-
+   WAV_IN();
    WAV_IN(char *wav_file_name);   
    ~WAV_IN();
    
@@ -47,6 +47,11 @@ public:
    // reports sample rate in Hz
    double get_sample_rate_hz();
 
+   // set wav filename to object WAV_IN
+   int set_filename(char *filename); 
+
+   int get_data_size();
+
 protected:
       
    double fs_hz;
@@ -56,6 +61,10 @@ protected:
    double *g_wdata_in;
    int g_num_isamp;
    long int g_max_isamp;
+
+   int wbuff_len;
+
+    
 
    friend class WAV_OUT;
 };
