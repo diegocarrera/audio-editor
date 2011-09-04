@@ -272,77 +272,44 @@ static void play2()
 static void echoEffect()
 {
   std::cout << "Echo effect activated" << std::endl;	
-  gint i=0,j;
-  gdouble delay =1000;
+  gint i=0,j=0;
+  int delay =1000;
   gdouble decay =0.5;
 	
   int channels = audio.get_num_channels();
   int nSamples = audio.get_num_samples ();
-  int sizeData = audio.get_data_size();
+  int sizeDataChunk = audio.get_data_size();
 
   double sampleRate = audio.get_sample_rate_hz();
   unsigned int bitsPerSample = audio.get_bits_per_sample();
+  double newData[sizeDataChunk],tempData[sizeDataChunk];
+  printf ("channels is: %d, nSamples: is %d, sizeData is: %d\n", channels,nSamples,sizeDataChunk);
 
-  unsigned char newData[sizeData], tempData[sizeData];
-
-  printf ("channels is: %d, nSamples: is %d, sizeData is: %d\n", channels,nSamples,sizeData);
-  while(audio.more_data_available()){
-	 tempData[i]=audio.read_current_input();
+  while(audio.more_data_available()){ 
+    //strcpy(newData,data.c_str());
+	 tempData[i]=audio.read_current_input();  ;
 	 i++;
   }
+  audio.reset_g_num_isamp();
+	
   printf ("contado es : %d\n", i);
 	
-
-  for (i=0; i<channels; i++){
-	for (j=1;j<(delay+1);j++){
-      newData[i*channels+j]= tempData[i*channels+j];
-		
-	}
-	for (j=(delay+1);j<nSamples;j++){
-	  newData[i*channels+j]= tempData[i*channels+j]; + decay *tempData[i*channels+j-1000];
-	}
-  }	
-
   WAV_OUT outfile(sampleRate, bitsPerSample, channels);
 
-  for (i=0;i<sizeData;i++){
-    outfile.write_current_output(newData[i]);
-  }
-
-	/*
-	while(audio.more_data_available()) {
+  i=0;
+  while(audio.more_data_available()) {
     double data = audio.read_current_input();
-    // If this were a real application, you'd probably do something
-    //  to the data here.
+	//outfile.write_current_output(tempData[i]);
+	if ((i+delay)<sizeDataChunk){ 
+	   //data = data * 0.1; <-- efecto bajar audio.. jejejej 
+		data = data + tempData[i+delay];
+		i++;
+	}
     outfile.write_current_output(data);
+	
   }
-	*/
 	
-  outfile.save_wave_file ("/home/dcarrera/soruce/gtk3/audio-player/Debug/src/file2.wav");  	
-  
-		
-/*
-// gdouble intensity=0.6;
- // gdouble feedback=0.4;
-* 
-  for (i = 0; i < nSamples; i++) { 
-    //guint echo0_index = ((echo_index + self->buffer_pos) % self->buffer_size_frames) * channels; 
-	//guint rbout_index = (self->buffer_pos % self->buffer_size_frames) * channels; 
-
-	  for (j = 0; j < channels; j++) {   
-      gdouble in = data[i*nSamples + j];
-      gdouble echo = buffer[echo0_index + j]; 
-      type out = in + intensity; 
-      data[i*channels + j] = out; 
-      buffer[rbout_index + j] = in + feedback * echo; 
-    } 
-    self->buffer_pos = (self->buffer_pos + 1) % self->buffer_size_frames;  
-  } 	
-
-
-*/
-
-	
+  outfile.save_wave_file ("/home/dcarrera/source/gtk3/audio-player/Debug/src/fileEcho.wav");  	
 
   
 

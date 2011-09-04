@@ -50,7 +50,10 @@ public:
    // set wav filename to object WAV_IN
    int set_filename(char *filename); 
 
+   // get size of data of dataChunk
    int get_data_size();
+
+   void reset_g_num_isamp();
 
 protected:
       

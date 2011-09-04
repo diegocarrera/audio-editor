@@ -91,6 +91,11 @@ WAV_IN::get_data_size(){
 }
 
 
+void
+WAV_IN::reset_g_num_isamp(){
+ g_num_isamp = 0;
+ return;
+}
 
 
 

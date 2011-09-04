@@ -91,6 +91,10 @@ WAV_IN::get_data_size(){
 }
 
 
+void  reset_g_num_isamp(){
+ g_num_isamp = 0;
+ return;
+}
 
 
 
@@ -249,6 +253,7 @@ WAV_IN::set_filename(char *file_name)
 
   /* find length of remaining data */
   wbuff_len = chk->dLen;
+  printf("wbuff_len size is: %i\n",wbuff_len);
 
   // find number of samples
   g_max_isamp = chk->dLen;
