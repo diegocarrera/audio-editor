@@ -262,64 +262,72 @@ static void playWav ()
 }
 
 
-static void play2()
-{
-	//ca_gtk_play_for_widget(buttonZoomIn);   
-	
- system("canberra-gtk-play -f /home/dcarrera/source/gtk3/gtk-tempo/Debug/src/file.wav");
-}
 
 static void echoEffect()
 {
   std::cout << "Echo effect activated" << std::endl;	
-  gint i=0,j=0;
+  gint i=0;
   int delay =1000;
-  gdouble decay =0.5;
+  double decay =0.5;
 	
   int channels = audio.get_num_channels();
-  int nSamples = audio.get_num_samples ();
   int sizeDataChunk = audio.get_data_size();
 
   double sampleRate = audio.get_sample_rate_hz();
   unsigned int bitsPerSample = audio.get_bits_per_sample();
-  double newData[sizeDataChunk],tempData[sizeDataChunk];
-  printf ("channels is: %d, nSamples: is %d, sizeData is: %d\n", channels,nSamples,sizeDataChunk);
+  double newData[sizeDataChunk];
+	
+  printf ("channels is: %d, sizeData is: %d\n", channels,sizeDataChunk);
 
   while(audio.more_data_available()){ 
-    //strcpy(newData,data.c_str());
-	 tempData[i]=audio.read_current_input();  ;
-	 i++;
+    newData[i]=audio.read_current_input();  ;
+	i++;
   }
   audio.reset_g_num_isamp();
-	
-  printf ("contado es : %d\n", i);
 	
   WAV_OUT outfile(sampleRate, bitsPerSample, channels);
 
   i=0;
   while(audio.more_data_available()) {
     double data = audio.read_current_input();
-	//outfile.write_current_output(tempData[i]);
 	if ((i+delay)<sizeDataChunk){ 
-	   //data = data * 0.1; <-- efecto bajar audio.. jejejej 
-		data = data + tempData[i+delay];
+		data = data + decay*newData[i+delay];
 		i++;
 	}
     outfile.write_current_output(data);
-	
   }
-	
-  outfile.save_wave_file ("/home/dcarrera/source/gtk3/audio-player/Debug/src/fileEcho.wav");  	
-
-  
-
+  outfile.save_wave_file ("/home/dcarrera/source/gtk3/audio-player/Debug/src/fileEcho.wav");
+  audio.reset_g_num_isamp();
   std::cout << "Echo effect applied" << std::endl;
-
 }
 
 
 
-//******************** GTK BASIC FUNCTIONS OF MAIN CLASS **************************
+
+static void volumenEffect()
+{
+  std::cout << "Volumen effect activated" << std::endl;	
+  gint i=0;
+	
+  int channels = audio.get_num_channels();
+  int sizeDataChunk = audio.get_data_size();
+  double sampleRate = audio.get_sample_rate_hz();
+  unsigned int bitsPerSample = audio.get_bits_per_sample();
+  audio.reset_g_num_isamp();
+  WAV_OUT outfile(sampleRate, bitsPerSample, channels);
+
+  while(audio.more_data_available()) {
+    double data = audio.read_current_input();	
+	data = data * 0.3; 
+    outfile.write_current_output(data);
+  }
+  outfile.save_wave_file ("/home/dcarrera/source/gtk3/audio-player/Debug/src/fileVolumen.wav");
+  audio.reset_g_num_isamp();
+  std::cout << "Volumen effect applied" << std::endl;
+}
+
+
+/******************** GTK BASIC FUNCTIONS OF MAIN CLASS **************************/
 
 
 // function to builder a UI
@@ -492,7 +500,7 @@ main(int argc, char *argv[])
   buttonPlay->signal_clicked().connect(sigc::ptr_fun(&playWav));	
            
   builder->get_widget("btnZoomIn", buttonZoomIn);
-  buttonZoomIn->signal_clicked().connect(sigc::ptr_fun(&play2));
+  buttonZoomIn->signal_clicked().connect(sigc::ptr_fun(&printer));
 
   builder->get_widget("btnZoomOut", buttonZoomOut);
   buttonZoomOut->signal_clicked().connect(sigc::ptr_fun(&printer));
@@ -501,7 +509,7 @@ main(int argc, char *argv[])
   buttonEffect1->signal_clicked().connect(sigc::ptr_fun(&echoEffect));
 	  
   builder->get_widget("btnEffect2", buttonEffect2);
-  buttonEffect2->signal_clicked().connect(sigc::ptr_fun(&printer));
+  buttonEffect2->signal_clicked().connect(sigc::ptr_fun(&volumenEffect));
 	      
 	
   // signals for menu	

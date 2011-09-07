@@ -67,8 +67,6 @@ protected:
 
    int wbuff_len;
 
-    
-
    friend class WAV_OUT;
 };
 
